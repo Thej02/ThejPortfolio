@@ -61,37 +61,6 @@ const ToggleButton = ({ onClick, isShowingMore }) => (
 );
 
 
-function TabPanel({ children, value, index, ...other }) {
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: { xs: 1, sm: 3 } }}>
-          <Typography component="div">{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    "aria-controls": `full-width-tabpanel-${index}`,
-  };
-}
-
 // keyboardRows definition for mechanical keyboard tech stack layout
 const keyboardRows = [
   [
@@ -227,9 +196,13 @@ export default function FullWidthTabs() {
   }, []);
 
   useEffect(() => {
-    const cachedProjects = localStorage.getItem('projects');
-    if (cachedProjects) {
-        setProjects(JSON.parse(cachedProjects));
+    try {
+      const cachedProjects = localStorage.getItem('projects');
+      if (cachedProjects && cachedProjects !== "undefined" && cachedProjects !== "null") {
+          setProjects(JSON.parse(cachedProjects));
+      }
+    } catch (err) {
+      console.warn("Failed to parse cached projects:", err);
     }
     fetchData();
   }, [fetchData]);

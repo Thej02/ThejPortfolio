@@ -8,6 +8,7 @@ import About from "./Pages/About";
 import AnimatedBackground from "./components/Background";
 import { AnimatePresence } from "framer-motion";
 import Footer from "./components/Footer";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
@@ -34,12 +35,18 @@ const LandingPage = ({ showWelcome, setShowWelcome }) => {
         <>
           <Navbar />
       
-          <Home />
-          <About />
-          <Suspense fallback={<div className="h-20" />}>
-            <Portofolio />
-            <ContactPage />
-          </Suspense>
+          <ErrorBoundary>
+            <Home />
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <About />
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <Suspense fallback={<div className="h-20" />}>
+              <Portofolio />
+              <ContactPage />
+            </Suspense>
+          </ErrorBoundary>
           <Footer />
         </>
       )}
@@ -48,12 +55,12 @@ const LandingPage = ({ showWelcome, setShowWelcome }) => {
 };
 
 const ProjectPageLayout = () => (
-  <>
+  <ErrorBoundary>
     <Suspense fallback={<div className="min-h-screen" />}>
       <ProjectDetails />
     </Suspense>
     <Footer />
-  </>
+  </ErrorBoundary>
 );
 
 function App() {

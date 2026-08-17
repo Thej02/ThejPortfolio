@@ -226,15 +226,97 @@ const Home = () => {
                   <div className={`relative lg:left-12 z-10 w-full opacity-90 transform transition-transform duration-500 ${
                     isHovering ? "scale-105" : "scale-100"
                   }`}>
-                    <img
-                      src="/Animation1.gif"
-                      alt="Developer Animation"
-                      className={`w-full h-full object-contain transition-all duration-500 ${
-                        isHovering 
-                          ? "scale-[95%] sm:scale-[90%] md:scale-[90%] lg:scale-[90%] rotate-2" 
-                          : "scale-[90%] sm:scale-[80%] md:scale-[80%] lg:scale-[80%]"
-                      }`}
-                    />
+                    <svg viewBox="0 0 500 500" className="w-full h-full object-contain select-none">
+                      <style dangerouslySetInnerHTML={{ __html: `
+                        @keyframes float-svg {
+                          0%, 100% { transform: translateY(0px); }
+                          50% { transform: translateY(-12px); }
+                        }
+                        @keyframes pulse-light {
+                          0%, 100% { opacity: 0.35; }
+                          50% { opacity: 0.7; }
+                        }
+                        .float-1 { animation: float-svg 3.5s ease-in-out infinite; }
+                        .float-2 { animation: float-svg 4.2s ease-in-out infinite 0.5s; }
+                        .float-3 { animation: float-svg 3.8s ease-in-out infinite 1s; }
+                        .float-4 { animation: float-svg 4.8s ease-in-out infinite 0.2s; }
+                        .pulse-svg { animation: pulse-light 4s ease-in-out infinite; }
+                      `}} />
+                      <defs>
+                        <linearGradient id="screenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#C9B6E4" stopOpacity="0.25" />
+                          <stop offset="100%" stopColor="#B8E3D2" stopOpacity="0.08" />
+                        </linearGradient>
+                        <linearGradient id="orbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#C9B6E4" stopOpacity="0.5" />
+                          <stop offset="100%" stopColor="#FAF7F5" stopOpacity="0.15" />
+                        </linearGradient>
+                      </defs>
+                      
+                      {/* Floating glowing background spots */}
+                      <circle cx="100" cy="180" r="45" fill="url(#orbGrad)" className="pulse-svg" />
+                      <circle cx="400" cy="300" r="35" fill="url(#orbGrad)" className="pulse-svg" style={{ animationDelay: "2s" }} />
+
+                      {/* Monitor Screen Frame */}
+                      <rect x="110" y="120" width="280" height="190" rx="16" fill="#FAF7F5" stroke="#3A3A3A" strokeWidth="4.5" />
+                      {/* Inner Screen */}
+                      <rect x="122" y="132" width="256" height="166" rx="8" fill="url(#screenGrad)" stroke="#3A3A3A" strokeWidth="2" />
+                      
+                      {/* Stand */}
+                      <path d="M220 310 L280 310 L290 350 L210 350 Z" fill="#EAE5DF" stroke="#3A3A3A" strokeWidth="4.5" strokeLinejoin="round" />
+                      {/* Base */}
+                      <rect x="170" y="350" width="160" height="15" rx="6" fill="#FAF7F5" stroke="#3A3A3A" strokeWidth="4.5" />
+
+                      {/* Code Lines on Screen */}
+                      <g strokeLinecap="round" strokeWidth="4">
+                        <line x1="140" y1="160" x2="200" y2="160" stroke="#C9B6E4" />
+                        <line x1="212" y1="160" x2="290" y2="160" stroke="#B8E3D2" />
+                        
+                        <line x1="140" y1="185" x2="175" y2="185" stroke="#F5F0BB" />
+                        <line x1="187" y1="185" x2="260" y2="185" stroke="#C9B6E4" />
+                        <line x1="272" y1="185" x2="310" y2="185" stroke="#3A3A3A" />
+                        
+                        <line x1="160" y1="210" x2="225" y2="210" stroke="#B8E3D2" />
+                        <line x1="237" y1="210" x2="340" y2="210" stroke="#F5F0BB" />
+                        
+                        <line x1="160" y1="235" x2="280" y2="235" stroke="#C9B6E4" />
+                        
+                        <line x1="140" y1="260" x2="195" y2="260" stroke="#B8E3D2" />
+                      </g>
+
+                      {/* Floating Keycaps and Coding bubbles */}
+                      {/* </> Badge */}
+                      <g transform="translate(50, 90)">
+                        <g className="float-1">
+                          <rect width="65" height="36" rx="10" fill="#FAF7F5" stroke="#3A3A3A" strokeWidth="3" />
+                          <text x="32.5" y="24" fontFamily="Courier, monospace" fontSize="16" fontWeight="bold" fill="#C9B6E4" textAnchor="middle">&lt;/&gt;</text>
+                        </g>
+                      </g>
+                      
+                      {/* {} Badge */}
+                      <g transform="translate(370, 95)">
+                        <g className="float-2">
+                          <rect width="55" height="36" rx="10" fill="#FAF7F5" stroke="#3A3A3A" strokeWidth="3" />
+                          <text x="27.5" y="24" fontFamily="Courier, monospace" fontSize="18" fontWeight="bold" fill="#B8E3D2" textAnchor="middle">{"{}"}</text>
+                        </g>
+                      </g>
+
+                      {/* DB Badge */}
+                      <g transform="translate(30, 240)">
+                        <g className="float-3">
+                          <rect width="70" height="36" rx="10" fill="#FAF7F5" stroke="#3A3A3A" strokeWidth="3" />
+                          <text x="35" y="23" fontFamily="Courier, monospace" fontSize="13" fontWeight="bold" fill="#F5F0BB" textAnchor="middle">SQL/DB</text>
+                        </g>
+                      </g>
+
+                      {/* API Badge */}
+                      <g transform="translate(390, 220)">
+                        <g className="float-4">
+                          <rect width="65" height="36" rx="10" fill="#FAF7F5" stroke="#3A3A3A" strokeWidth="3" />
+                          <text x="32.5" y="23" fontFamily="Courier, monospace" fontSize="13" fontWeight="bold" fill="#C9B6E4" textAnchor="middle">REST</text>
+                        </g>
+                      </g>
+                    </svg>
                   </div>
 
                   <div className={`absolute inset-0 pointer-events-none transition-all duration-700 ${

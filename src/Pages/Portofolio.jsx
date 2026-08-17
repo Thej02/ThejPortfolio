@@ -2,19 +2,9 @@ import React, { useEffect, useState, useCallback } from "react";
 
 import { supabase } from "../supabase"; 
 
-import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views";
-import { useTheme } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import CardProject from "../components/CardProject";
-import TechStackIcon from "../components/TechStackIcon";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { Code, Award, Boxes, Server, Layout, Terminal } from "lucide-react";
 
 
 const ToggleButton = ({ onClick, isShowingMore }) => (
@@ -271,253 +261,171 @@ export default function FullWidthTabs() {
     fetchData(); // Tetap panggil fetchData untuk sinkronisasi data terbaru
   }, [fetchData]);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   const toggleShowMore = useCallback((type) => {
     if (type === 'projects') {
       setShowAllProjects(prev => !prev);
-    } else {
-      setShowAllCertificates(prev => !prev);
     }
   }, []);
 
   const displayedProjects = showAllProjects ? projects : projects.slice(0, initialItems);
-  const displayedCertificates = showAllCertificates ? certificates : certificates.slice(0, initialItems);
 
-  // Sisa dari komponen (return statement) tidak ada perubahan
   return (
-    <div className="md:px-[10%] px-[5%] w-full sm:mt-0 mt-[3rem] bg-transparent overflow-hidden" id="Portofolio">
-      {/* Header section - unchanged */}
-      <div className="text-center pb-10" data-aos="fade-up" data-aos-duration="1000">
-        <h2 className="inline-block text-3xl md:text-5xl font-bold text-center mx-auto text-pastel-text">
-          Portfolio Showcase
-        </h2>
-        <p className="text-pastel-muted max-w-2xl mx-auto text-sm md:text-base mt-2">
-          Explore my journey through projects and technical expertise. 
-          Each section represents a milestone in my continuous learning path.
-        </p>
-      </div>
+    <div className="w-full bg-transparent overflow-hidden">
+      
+      {/* Section 1: Tech Stack (Skills) */}
+      <div className="md:px-[10%] px-[5%] pb-16 pt-16 sm:mt-0 mt-[3rem]" id="Skills">
+        <div className="text-center pb-10" data-aos="fade-up" data-aos-duration="1000">
+          <h2 className="inline-block text-3xl md:text-5xl font-bold text-center mx-auto text-pastel-text">
+            Skills & Expertise
+          </h2>
+          <p className="text-pastel-muted max-w-2xl mx-auto text-sm md:text-base mt-2">
+            Explore the core technologies, frameworks, databases, and architectural concepts I use to engineer backend microservices and full-stack software.
+          </p>
+        </div>
 
-      <Box sx={{ width: "100%" }}>
-        {/* AppBar and Tabs section - unchanged */}
-        <AppBar
-          position="static"
-          elevation={0}
-          sx={{
-            bgcolor: "transparent",
-            border: "1px solid rgba(58, 58, 58, 0.15)",
-            borderRadius: "20px",
-            position: "relative",
-            overflow: "hidden",
-            "&::before": {
-              content: '""',
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: "linear-gradient(180deg, rgba(201, 182, 228, 0.05) 0%, rgba(184, 227, 214, 0.05) 100%)",
-              backdropFilter: "blur(10px)",
-              zIndex: 0,
-            },
-          }}
-          className="md:px-4"
-        >
-          {/* Tabs remain unchanged */}
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            textColor="secondary"
-            indicatorColor="secondary"
-            variant="fullWidth"
-            sx={{
-              minHeight: "70px",
-              "& .MuiTab-root": {
-                fontSize: { xs: "0.9rem", md: "1rem" },
-                fontWeight: "600",
-                color: "#3A3A3A",
-                textTransform: "none",
-                transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-                padding: "20px 0",
-                zIndex: 1,
-                margin: "8px",
-                borderRadius: "12px",
-                "&:hover": {
-                  color: "#3A3A3A",
-                  backgroundColor: "rgba(201, 182, 228, 0.15)",
-                  transform: "translateY(-2px)",
-                  "& .lucide": {
-                    transform: "scale(1.1) rotate(5deg)",
-                  },
-                },
-                "&.Mui-selected": {
-                  color: "#3A3A3A",
-                  background: "linear-gradient(135deg, rgba(201, 182, 228, 0.25), rgba(184, 227, 214, 0.25))",
-                  boxShadow: "0 4px 15px -3px rgba(201, 182, 228, 0.2)",
-                  "& .lucide": {
-                    color: "#C9B6E4",
-                  },
-                },
-              },
-              "& .MuiTabs-indicator": {
-                height: 0,
-              },
-              "& .MuiTabs-flexContainer": {
-                gap: "8px",
-              },
-            }}
+        <div className="container mx-auto pb-10 text-[#3A3A3A] px-2 sm:px-4 flex flex-col items-center">
+          {/* Keyboard Instructions */}
+          <p className="text-center text-pastel-muted text-xs md:text-sm mb-6 max-w-lg">
+            ⌨️ Interactive Mechanical Keyboard: Hover over or tap any artisan keycap below to inspect my tech stack details and software tools!
+          </p>
+
+          {/* Keyboard Outer Shell Case */}
+          <div 
+            className="w-full max-w-[1000px] bg-[#FAF7F5] border-4 border-[#3A3A3A] rounded-[30px] p-6 shadow-[0_12px_24px_-5px_rgba(0,0,0,0.15)] overflow-x-auto scrollbar-thin select-none"
+            data-aos="zoom-in"
+            data-aos-duration="1000"
           >
-            <Tab
-              icon={<Code className="mb-2 w-5 h-5 transition-all duration-300" />}
-              label="Projects"
-              {...a11yProps(0)}
-            />
-            <Tab
-              icon={<Boxes className="mb-2 w-5 h-5 transition-all duration-300" />}
-              label="Tech Stack"
-              {...a11yProps(1)}
-            />
-          </Tabs>
-        </AppBar>
+            <div className="min-w-[850px] space-y-3.5">
+              {keyboardRows.map((row, rowIndex) => (
+                <div key={rowIndex} className="flex gap-2">
+                  {row.map((k, keyIndex) => {
+                    const isTech = k.type === "tech";
+                    
+                    // Layout key spans
+                    let flexGrow = 1;
+                    let minWidth = "60px";
+                    if (k.span) {
+                      flexGrow = k.span;
+                      minWidth = `${k.span * 60}px`;
+                    }
 
-        <SwipeableViews
-          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-          index={value}
-          onChangeIndex={setValue}
-        >
-          <TabPanel value={value} index={0} dir={theme.direction}>
-            <div className="container mx-auto flex justify-center items-center overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
-                {displayedProjects.map((project, index) => (
-                  <div
-                    key={project.id || index}
-                    data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
-                    data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
-                  >
-                    <CardProject
-                      Img={project.Img}
-                      Title={project.Title}
-                      Description={project.Description}
-                      Link={project.Link}
-                      id={project.id}
-                      TechStack={project.TechStack}
-                    />
-                  </div>
-                ))}
-              </div>
+                    // Theme keycap colors
+                    let keyBg = "bg-white";
+                    if (k.key === "ESC") {
+                      keyBg = "bg-[#B8E3D2] border-[#2E6B57]";
+                    } else if (k.key === "ENTER") {
+                      keyBg = "bg-[#C9B6E4] border-[#7F6B9E]";
+                    } else if (!isTech) {
+                      keyBg = "bg-[#EAE5DF] border-[#C3B8AC] text-slate-500";
+                    } else {
+                      keyBg = "bg-white hover:bg-gradient-to-r hover:from-pastel-primary/10 hover:to-pastel-tertiary/10";
+                    }
+
+                    return (
+                      <div
+                        key={keyIndex}
+                        style={{ flexGrow, minWidth }}
+                        className={`h-[56px] relative rounded-xl border-2 border-[#3A3A3A] font-bold text-sm transition-all duration-100 flex flex-col items-center justify-center cursor-pointer shadow-[0_4px_0_#3A3A3A] hover:shadow-[0_1px_0_#3A3A3A] hover:translate-y-[3px] active:scale-98 ${keyBg}`}
+                        onMouseEnter={() => isTech && setActiveKey(k)}
+                      >
+                        {/* Keycap legend */}
+                        <span className="text-[12px] md:text-[13px] tracking-wide text-pastel-text">
+                          {k.key}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              ))}
             </div>
-            {projects.length > initialItems && (
-              <div className="mt-6 w-full flex justify-start">
-                <ToggleButton
-                  onClick={() => toggleShowMore('projects')}
-                  isShowingMore={showAllProjects}
-                />
+          </div>
+
+          {/* Keyboard Inspector Panel Card */}
+          <div 
+            className="w-full max-w-[1000px] mt-8 p-6 bg-pastel-card border border-pastel-border/60 rounded-2xl min-h-[140px] transition-all duration-300 shadow-sm relative overflow-hidden flex flex-col justify-center"
+            data-aos="fade-up"
+            data-aos-duration="800"
+          >
+            {/* Decorative LED Indicator dots */}
+            <div className="absolute top-4 right-6 flex gap-2">
+              <span className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${activeKey ? "bg-emerald-400 shadow-[0_0_8px_#34d399]" : "bg-slate-300"}`}></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
+            </div>
+
+            {activeKey ? (
+              <div className="space-y-3 animate-fadeIn">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2.5">
+                  <span className="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase tracking-wider bg-pastel-primary/10 border border-pastel-primary/15 text-indigo-700 w-fit">
+                    {activeKey.category}
+                  </span>
+                  <h4 className="text-xl font-bold text-pastel-text">
+                    {activeKey.label}
+                  </h4>
+                </div>
+                <p className="text-sm text-pastel-muted leading-relaxed">
+                  {activeKey.description}
+                </p>
+              </div>
+            ) : (
+              <div className="text-center text-pastel-muted py-6 flex flex-col items-center gap-2">
+                <span className="text-2xl animate-bounce">⌨️</span>
+                <p className="text-sm font-medium">
+                  Hover over any keycap on the mechanical keyboard to inspect my tech stack details!
+                </p>
               </div>
             )}
-          </TabPanel>
+          </div>
+        </div>
+      </div>
 
-          <TabPanel value={value} index={1} dir={theme.direction}>
-            <div className="container mx-auto pb-[5%] text-[#3A3A3A] px-2 sm:px-4 flex flex-col items-center">
-              
-              {/* Keyboard Instructions */}
-              <p className="text-center text-pastel-muted text-xs md:text-sm mb-6 max-w-lg">
-                ⌨️ Interactive Mechanical Keyboard: Hover over or tap any artisan keycap below to inspect my tech stack details and software tools!
-              </p>
+      {/* Decorative Divider */}
+      <div className="w-full flex justify-center py-6">
+        <div className="w-[80%] h-[1px] bg-gradient-to-r from-transparent via-pastel-border to-transparent" />
+      </div>
 
-              {/* Keyboard Outer Shell Case */}
-              <div 
-                className="w-full max-w-[1000px] bg-[#FAF7F5] border-4 border-[#3A3A3A] rounded-[30px] p-6 shadow-[0_12px_24px_-5px_rgba(0,0,0,0.15)] overflow-x-auto scrollbar-thin select-none"
-                data-aos="zoom-in"
-                data-aos-duration="1000"
+      {/* Section 2: Projects */}
+      <div className="md:px-[10%] px-[5%] w-full pb-16 pt-16" id="Portofolio">
+        <div className="text-center pb-10" data-aos="fade-up" data-aos-duration="1000">
+          <h2 className="inline-block text-3xl md:text-5xl font-bold text-center mx-auto text-pastel-text">
+            Featured Projects
+          </h2>
+          <p className="text-pastel-muted max-w-2xl mx-auto text-sm md:text-base mt-2">
+            A curated showcase of applications and software highlights that I have designed, engineered, and deployed.
+          </p>
+        </div>
+
+        <div className="container mx-auto flex justify-center items-center overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-6">
+            {displayedProjects.map((project, index) => (
+              <div
+                key={project.id || index}
+                data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
+                data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
               >
-                <div className="min-w-[850px] space-y-3.5">
-                  {keyboardRows.map((row, rowIndex) => (
-                    <div key={rowIndex} className="flex gap-2">
-                      {row.map((k, keyIndex) => {
-                        const isTech = k.type === "tech";
-                        
-                        // Layout key spans
-                        let flexGrow = 1;
-                        let minWidth = "60px";
-                        if (k.span) {
-                          flexGrow = k.span;
-                          minWidth = `${k.span * 60}px`;
-                        }
-
-                        // Theme keycap colors
-                        let keyBg = "bg-white";
-                        if (k.key === "ESC") {
-                          keyBg = "bg-[#B8E3D2] border-[#2E6B57]";
-                        } else if (k.key === "ENTER") {
-                          keyBg = "bg-[#C9B6E4] border-[#7F6B9E]";
-                        } else if (!isTech) {
-                          keyBg = "bg-[#EAE5DF] border-[#C3B8AC] text-slate-500";
-                        } else {
-                          keyBg = "bg-white hover:bg-gradient-to-r hover:from-pastel-primary/10 hover:to-pastel-tertiary/10";
-                        }
-
-                        return (
-                          <div
-                            key={keyIndex}
-                            style={{ flexGrow, minWidth }}
-                            className={`h-[56px] relative rounded-xl border-2 border-[#3A3A3A] font-bold text-sm transition-all duration-100 flex flex-col items-center justify-center cursor-pointer shadow-[0_4px_0_#3A3A3A] hover:shadow-[0_1px_0_#3A3A3A] hover:translate-y-[3px] active:scale-98 ${keyBg}`}
-                            onMouseEnter={() => isTech && setActiveKey(k)}
-                          >
-                            {/* Keycap character legend */}
-                            <span className="text-[12px] md:text-[13px] tracking-wide text-pastel-text">
-                              {k.key}
-                            </span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  ))}
-                </div>
+                <CardProject
+                  Img={project.Img}
+                  Title={project.Title}
+                  Description={project.Description}
+                  Link={project.Link}
+                  id={project.id}
+                  TechStack={project.TechStack}
+                />
               </div>
+            ))}
+          </div>
+        </div>
 
-              {/* Keyboard Inspector Panel Card */}
-              <div 
-                className="w-full max-w-[1000px] mt-8 p-6 bg-pastel-card border border-pastel-border/60 rounded-2xl min-h-[140px] transition-all duration-300 shadow-sm relative overflow-hidden flex flex-col justify-center"
-                data-aos="fade-up"
-                data-aos-duration="800"
-              >
-                {/* Decorative LED Indicator dots */}
-                <div className="absolute top-4 right-6 flex gap-2">
-                  <span className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${activeKey ? "bg-emerald-400 shadow-[0_0_8px_#34d399]" : "bg-slate-300"}`}></span>
-                  <span className="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
-                  <span className="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
-                </div>
+        {projects.length > initialItems && (
+          <div className="mt-8 w-full flex justify-center">
+            <ToggleButton
+              onClick={() => toggleShowMore('projects')}
+              isShowingMore={showAllProjects}
+            />
+          </div>
+        )}
+      </div>
 
-                {activeKey ? (
-                  <div className="space-y-3 animate-fadeIn">
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2.5">
-                      <span className="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase tracking-wider bg-pastel-primary/10 border border-pastel-primary/15 text-indigo-700 w-fit">
-                        {activeKey.category}
-                      </span>
-                      <h4 className="text-xl font-bold text-pastel-text">
-                        {activeKey.label}
-                      </h4>
-                    </div>
-                    <p className="text-sm text-pastel-muted leading-relaxed">
-                      {activeKey.description}
-                    </p>
-                  </div>
-                ) : (
-                  <div className="text-center text-pastel-muted py-6 flex flex-col items-center gap-2">
-                    <span className="text-2xl animate-bounce">⌨️</span>
-                    <p className="text-sm font-medium">
-                      Hover over any keycap on the mechanical keyboard to inspect my tech stack details!
-                    </p>
-                  </div>
-                )}
-              </div>
-
-            </div>
-          </TabPanel>
-        </SwipeableViews>
-      </Box>
     </div>
   );
 }

@@ -9,7 +9,8 @@ const Navbar = () => {
     const navItems = [
         { href: "#Home", label: "Home" },
         { href: "#About", label: "About" },
-        { href: "#Portofolio", label: "Portofolio" },
+        { href: "#Skills", label: "Skills" },
+        { href: "#Portofolio", label: "Projects" },
         { href: "#Contact", label: "Contact" },
     ];
 

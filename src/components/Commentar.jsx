@@ -268,40 +268,55 @@ const Komentar = () => {
     // Fetch regular comments (excluding pinned) and set up real-time subscription
     useEffect(() => {
         const fetchComments = async () => {
-            const { data, error } = await supabase
-                .from('portfolio_comments')
-                .select('*')
-                .eq('is_pinned', false)
-                .order('created_at', { ascending: false });
-            
-            if (error) {
-                console.error('Error fetching comments:', error);
-                return;
+            try {
+                const { data, error } = await supabase
+                    .from('portfolio_comments')
+                    .select('*')
+                    .eq('is_pinned', false)
+                    .order('created_at', { ascending: false });
+                
+                if (error) {
+                    console.error('Error fetching comments:', error);
+                    return;
+                }
+                
+                setComments(data || []);
+            } catch (err) {
+                console.warn('Failed to fetch comments (Supabase unconfigured or offline):', err.message);
             }
-            
-            setComments(data || []);
         };
 
         fetchComments();
 
         // Set up real-time subscription
-        const subscription = supabase
-            .channel('portfolio_comments')
-            .on('postgres_changes', 
-                { 
-                    event: '*', 
-                    schema: 'public', 
-                    table: 'portfolio_comments',
-                    filter: 'is_pinned=eq.false'
-                }, 
-                () => {
-                    fetchComments(); // Refresh comments when changes occur
-                }
-            )
-            .subscribe();
+        let subscription;
+        try {
+            subscription = supabase
+                .channel('portfolio_comments')
+                .on('postgres_changes', 
+                    { 
+                        event: '*', 
+                        schema: 'public', 
+                        table: 'portfolio_comments',
+                        filter: 'is_pinned=eq.false'
+                    }, 
+                    () => {
+                        fetchComments(); // Refresh comments when changes occur
+                    }
+                )
+                .subscribe();
+        } catch (err) {
+            console.warn('Failed to subscribe to comments channel:', err.message);
+        }
 
         return () => {
-            subscription.unsubscribe();
+            if (subscription) {
+                try {
+                    subscription.unsubscribe();
+                } catch (err) {
+                    console.error('Error unsubscribing comments channel:', err);
+                }
+            }
         };
     }, []);
 

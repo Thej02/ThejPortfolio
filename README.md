@@ -4,15 +4,11 @@ A personal portfolio website showcasing my work, technical skills, experience, p
 
 **Live:** https://thejaswinayak.vercel.app
 
----
-
 ## About
 
 I am Thejaswi Nayak, a Software Engineer and Backend Developer interested in building reliable software, backend systems, and AI-powered applications.
 
 This portfolio brings together my development journey, selected projects, technical experience, and professional achievements.
-
----
 
 ## Built With
 
@@ -24,8 +20,6 @@ This portfolio brings together my development journey, selected projects, techni
 * AOS
 * Material UI
 * Lucide
-
----
 
 ## What You'll Find
 
@@ -44,8 +38,6 @@ Certifications and learning achievements.
 **Leadership**
 My experience in leadership and student activities.
 
----
-
 ## Links
 
 * **Portfolio:** https://thejaswinayak.vercel.app
@@ -54,5 +46,4 @@ My experience in leadership and student activities.
 * **Email:** [thejaswinayak05@gmail.com](mailto:thejaswinayak05@gmail.com)
 
 ---
-
 Built and maintained by **Thejaswi Nayak**.

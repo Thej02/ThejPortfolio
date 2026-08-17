@@ -419,65 +419,101 @@ export default function FullWidthTabs() {
           </TabPanel>
 
           <TabPanel value={value} index={1} dir={theme.direction}>
-            <div className="container mx-auto pb-[5%] text-[#3A3A3A] px-2 sm:px-4">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {techCategories.map((category, catIndex) => {
-                  const CategoryIcon = category.iconComponent;
-                  return (
-                    <div
-                      key={catIndex}
-                      data-aos="fade-up"
-                      data-aos-duration="1000"
-                      data-aos-delay={catIndex * 150}
-                      className="bg-pastel-card border border-pastel-border/60 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between"
-                    >
-                      <div>
-                        {/* Category Header */}
-                        <div className="flex items-center gap-3.5 mb-4">
-                          <div className="p-3 rounded-2xl bg-pastel-primary/10 border border-pastel-primary/15 text-pastel-primary">
-                            <CategoryIcon className="w-6 h-6" />
+            <div className="container mx-auto pb-[5%] text-[#3A3A3A] px-2 sm:px-4 flex flex-col items-center">
+              
+              {/* Keyboard Instructions */}
+              <p className="text-center text-pastel-muted text-xs md:text-sm mb-6 max-w-lg">
+                ⌨️ Interactive Mechanical Keyboard: Hover over or tap any artisan keycap below to inspect my tech stack details and software tools!
+              </p>
+
+              {/* Keyboard Outer Shell Case */}
+              <div 
+                className="w-full max-w-[1000px] bg-[#FAF7F5] border-4 border-[#3A3A3A] rounded-[30px] p-6 shadow-[0_12px_24px_-5px_rgba(0,0,0,0.15)] overflow-x-auto scrollbar-thin select-none"
+                data-aos="zoom-in"
+                data-aos-duration="1000"
+              >
+                <div className="min-w-[850px] space-y-3.5">
+                  {keyboardRows.map((row, rowIndex) => (
+                    <div key={rowIndex} className="flex gap-2">
+                      {row.map((k, keyIndex) => {
+                        const isTech = k.type === "tech";
+                        
+                        // Layout key spans
+                        let flexGrow = 1;
+                        let minWidth = "60px";
+                        if (k.span) {
+                          flexGrow = k.span;
+                          minWidth = `${k.span * 60}px`;
+                        }
+
+                        // Theme keycap colors
+                        let keyBg = "bg-white";
+                        if (k.key === "ESC") {
+                          keyBg = "bg-[#B8E3D2] border-[#2E6B57]";
+                        } else if (k.key === "ENTER") {
+                          keyBg = "bg-[#C9B6E4] border-[#7F6B9E]";
+                        } else if (!isTech) {
+                          keyBg = "bg-[#EAE5DF] border-[#C3B8AC] text-slate-500";
+                        } else {
+                          keyBg = "bg-white hover:bg-gradient-to-r hover:from-pastel-primary/10 hover:to-pastel-tertiary/10";
+                        }
+
+                        return (
+                          <div
+                            key={keyIndex}
+                            style={{ flexGrow, minWidth }}
+                            className={`h-[56px] relative rounded-xl border-2 border-[#3A3A3A] font-bold text-sm transition-all duration-100 flex flex-col items-center justify-center cursor-pointer shadow-[0_4px_0_#3A3A3A] hover:shadow-[0_1px_0_#3A3A3A] hover:translate-y-[3px] active:scale-98 ${keyBg}`}
+                            onMouseEnter={() => isTech && setActiveKey(k)}
+                          >
+                            {/* Keycap character legend */}
+                            <span className="text-[12px] md:text-[13px] tracking-wide text-pastel-text">
+                              {k.key}
+                            </span>
                           </div>
-                          <div>
-                            <h3 className="text-lg font-bold text-pastel-text">{category.title}</h3>
-                            <p className="text-[0.7rem] uppercase tracking-wider text-pastel-primary font-bold">Category</p>
-                          </div>
-                        </div>
-                        <p className="text-xs text-pastel-muted mb-6 leading-relaxed">
-                          {category.description}
-                        </p>
- 
-                        {/* Skills List */}
-                        <div className="space-y-5">
-                          {category.skills.map((skill, skillIndex) => (
-                            <div key={skillIndex} className="group space-y-2">
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2.5">
-                                  <img
-                                    src={skill.icon}
-                                    alt={`${skill.name} icon`}
-                                    className="w-5 h-5 object-contain transform group-hover:scale-110 transition-transform duration-300"
-                                  />
-                                  <span className="text-sm font-bold text-pastel-text">{skill.name}</span>
-                                </div>
-                                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pastel-secondary/15 text-indigo-700 border border-pastel-secondary/20">
-                                  {skill.level}
-                                </span>
-                              </div>
-                              {/* Custom Interactive Progress Bar */}
-                              <div className="h-2 w-full bg-white/60 border border-pastel-border rounded-full overflow-hidden shadow-inner">
-                                <div
-                                  className="h-full rounded-full bg-gradient-to-r from-pastel-primary to-pastel-tertiary transition-all duration-1000 ease-out origin-left"
-                                  style={{ width: `${skill.progress}%` }}
-                                />
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+                        );
+                      })}
                     </div>
-                  );
-                })}
+                  ))}
+                </div>
               </div>
+
+              {/* Keyboard Inspector Panel Card */}
+              <div 
+                className="w-full max-w-[1000px] mt-8 p-6 bg-pastel-card border border-pastel-border/60 rounded-2xl min-h-[140px] transition-all duration-300 shadow-sm relative overflow-hidden flex flex-col justify-center"
+                data-aos="fade-up"
+                data-aos-duration="800"
+              >
+                {/* Decorative LED Indicator dots */}
+                <div className="absolute top-4 right-6 flex gap-2">
+                  <span className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${activeKey ? "bg-emerald-400 shadow-[0_0_8px_#34d399]" : "bg-slate-300"}`}></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
+                </div>
+
+                {activeKey ? (
+                  <div className="space-y-3 animate-fadeIn">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2.5">
+                      <span className="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase tracking-wider bg-pastel-primary/10 border border-pastel-primary/15 text-indigo-700 w-fit">
+                        {activeKey.category}
+                      </span>
+                      <h4 className="text-xl font-bold text-pastel-text">
+                        {activeKey.label}
+                      </h4>
+                    </div>
+                    <p className="text-sm text-pastel-muted leading-relaxed">
+                      {activeKey.description}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="text-center text-pastel-muted py-6 flex flex-col items-center gap-2">
+                    <span className="text-2xl animate-bounce">⌨️</span>
+                    <p className="text-sm font-medium">
+                      Hover over any keycap on the mechanical keyboard to inspect my tech stack details!
+                    </p>
+                  </div>
+                )}
+              </div>
+
             </div>
           </TabPanel>
         </SwipeableViews>

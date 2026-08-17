@@ -236,6 +236,60 @@ ON storage.objects FOR SELECT
 TO public
 USING (bucket_id = 'profile-images');
 
+-- Optional: seed featured projects
+INSERT INTO public.projects ("Title", "Description", "Img", "Link", "Github", "Features", "TechStack", order_index)
+VALUES 
+(
+  'ThejGPT : Conversational AI Platform',
+  'Built a production-style conversational AI platform featuring persistent chat sessions, modular REST APIs, secure backend architecture, and LLM-powered responses using the Gemini API.',
+  'https://your-project-id.supabase.co/storage/v1/object/public/project-images/ThejGPT.jpg',
+  'https://github.com/Thej02/ThejGPT',
+  'https://github.com/Thej02/ThejGPT',
+  '["Persistent Chat Sessions", "Modular REST APIs", "Secure Backend Architecture", "Gemini LLM Responses"]'::jsonb,
+  '["React", "Node.js", "MongoDB", "Express", "Gemini API"]'::jsonb,
+  1
+),
+(
+  'LunaFlow : Period & Wellness Companion',
+  'A secure full-stack menstrual wellness platform with intelligent period prediction, symptom tracking, mood journaling, personalized wellness insights, and interactive health analytics.',
+  'https://your-project-id.supabase.co/storage/v1/object/public/project-images/LunaFlow.jpg',
+  'https://github.com/Thej02/LunaFlow',
+  'https://github.com/Thej02/LunaFlow',
+  '["Intelligent Cycle Prediction", "Symptom Tracking & Mood Journaling", "Personalized Wellness Insights", "Interactive Analytics"]'::jsonb,
+  '["React", "TypeScript", "Node.js", "MongoDB", "JWT", "Framer Motion"]'::jsonb,
+  2
+),
+(
+  'SympCheck',
+  'Developed a secure, AI-powered healthcare triage application offering symptom analysis, SOS assistance, and location-based emergency support. Integrated Gemini API and Firebase for fast, multilingual responses.',
+  'https://your-project-id.supabase.co/storage/v1/object/public/project-images/SympCheck.jpg',
+  'https://github.com/Thej02/SympCheck',
+  'https://github.com/Thej02/SympCheck',
+  '["AI Triage Diagnostics", "Multilingual Support", "SOS Assistance", "Location-based Emergency Services"]'::jsonb,
+  '["Python", "Flask", "Azure", "React Native", "Gemini API"]'::jsonb,
+  3
+),
+(
+  'VoxAI',
+  'Built a voice-first multilingual e-commerce platform enabling shopping through natural voice interactions. Integrated Gemini API, Firebase, and Razorpay for an intelligent user experience.',
+  'https://your-project-id.supabase.co/storage/v1/object/public/project-images/VoxAI.png',
+  'https://github.com/Thej02/VoxAI-VoiceMart',
+  'https://github.com/Thej02/VoxAI-VoiceMart',
+  '["Voice Shopping Assistance", "Multilingual Voice Control", "Secure Razorpay Gateways", "Realtime Inventory Sync"]'::jsonb,
+  '["JavaScript", "Firebase", "Gemini", "Razorpay"]'::jsonb,
+  4
+),
+(
+  'Canara InfoBot',
+  'Developed a 24×7 AI-powered campus assistant to answer academic, admission, placement, and campus-related queries. Built with Gemini API and a responsive interface for real-time assistance across devices.',
+  'https://your-project-id.supabase.co/storage/v1/object/public/project-images/CanaraInfoBot.png',
+  'https://github.com/Thej02/CanaraInfoMate-Bot',
+  'https://github.com/Thej02/CanaraInfoMate-Bot',
+  '["24/7 Academic Assistance", "Responsive Mobile-First UI", "Campus Placement Q&A", "Realtime Admissions Guidance"]'::jsonb,
+  '["Gemini API", "HTML", "CSS", "JavaScript"]'::jsonb,
+  5
+);
+
 -- Optional: default pinned comment
 INSERT INTO public.portfolio_comments (
   content,

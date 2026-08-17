@@ -102,46 +102,105 @@ function a11yProps(index) {
   };
 }
 
-// techCategories definition
-const techCategories = [
+// keyboardRows definition for mechanical keyboard tech stack layout
+const keyboardRows = [
+  [
+    { key: "ESC", label: "ESC", type: "system", span: 1 },
+    { key: "Java", label: "Java", type: "tech", category: "Programming Languages", description: "Class-based, object-oriented language optimized for enterprise-grade backend services." },
+    { key: "JS", label: "JavaScript", type: "tech", category: "Languages & Scripting", description: "Dynamic scripting engine utilized for full-stack logic, asynchronous runtime services, and styling." },
+    { key: "C", label: "C Language", type: "tech", category: "System Programming", description: "Low-level structures and compilation foundations for system coding and optimized algorithm blocks." },
+    { key: "SQL", label: "SQL", type: "tech", category: "Databases & Queries", description: "Relational database querying and management standards across MySQL, PostgreSQL, and SQLite." },
+    { key: "Python", label: "Python", type: "tech", category: "Scripting & AI Integration", description: "High-level programming platform optimized for scripts, machine learning prompts, and quick web hooks." },
+    { key: "Git", label: "Git", type: "tech", category: "Tools & Collaboration", description: "Distributed codebase management and change auditing tool built for collaborative software engineering." },
+    { key: "Linux", label: "Linux", type: "tech", category: "Infrastructure", description: "Unix-based operating system shell administration, scripting utilities, and cloud container hosting." },
+    { key: "AWS", label: "AWS", type: "tech", category: "Cloud & Infrastructure", description: "Amazon Web Services environment hosting server instances, storage containers, and virtual compute nodes." },
+    { key: "S3", label: "AWS S3", type: "tech", category: "Cloud Storage", description: "Simple Storage Service containers configured for secure storage of document vaults, logs, and database seeds." },
+    { key: "EC2", label: "AWS EC2", type: "tech", category: "Cloud Compute", description: "Elastic Compute Cloud system virtualizing secure OS instances to deploy live production APIs." },
+    { key: "DEL", label: "Del", type: "system", span: 1 }
+  ],
+  [
+    { key: "TAB", label: "Tab", type: "system", span: 1.5 },
+    { key: "React", label: "React.js", type: "tech", category: "Frontend Frameworks", description: "Virtual DOM UI engine for rendering dynamic views and handling frontend states." },
+    { key: "HTML", label: "HTML5", type: "tech", category: "Languages & Web", description: "Structural markup specifications formatting standard semantic DOM hierarchies." },
+    { key: "CSS", label: "CSS3", type: "tech", category: "Languages & Web", description: "Styling standards, flexible page layouts, grids, media queries, and transition keys." },
+    { key: "Node", label: "Node.js", type: "tech", category: "Backend Runtimes", description: "Asynchronous JavaScript event loops serving concurrent connections on server-side nodes." },
+    { key: "Express", label: "Express", type: "tech", category: "Backend Runtimes", description: "Minimalist server routing engine running endpoints, middleware, and backend API routes." },
+    { key: "Mongo", label: "MongoDB", type: "tech", category: "Databases & Queries", description: "Flexible schema storage hosting JSON documents in NoSQL setups." },
+    { key: "MySQL", label: "MySQL", type: "tech", category: "Databases & Queries", description: "Relational database server orchestrating tables, indices, foreign relations, and atomic commits." },
+    { key: "REST", label: "REST APIs", type: "tech", category: "Architecture Standards", description: "HTTP RESTful conventions designing secure endpoints and communication protocols." },
+    { key: "Postman", label: "Postman", type: "tech", category: "Tools & Collaboration", description: "Testing desktop framework simulating endpoints, verifying JSON responses, and building APIs." },
+    { key: "BACK", label: "Backspace", type: "system", span: 1.5 }
+  ],
+  [
+    { key: "CAPS", label: "Caps Lock", type: "system", span: 1.75 },
+    { key: "DSA", label: "DSA", type: "tech", category: "Computer Science", description: "Data Structures and Algorithms parsing computational paths and sorting data efficiently." },
+    { key: "OOPs", label: "OOPs", type: "tech", category: "Computer Science", description: "Object-Oriented Programming paradigms: Inheritance, Encapsulation, Polymorphism, and Abstraction." },
+    { key: "DBMS", label: "DBMS", type: "tech", category: "Computer Science", description: "Database management system algorithms, transactions, index caching, and logging schemas." },
+    { key: "OS", label: "OS", type: "tech", category: "Computer Science", description: "Operating system principles tracking process schedules, threads, page tables, and file maps." },
+    { key: "Networks", label: "Computer Networks", type: "tech", category: "Computer Science", description: "Networking configurations detailing sockets, TCP/UDP sockets, DNS, and IP stacks." },
+    { key: "Bash", label: "Bash/Shell", type: "tech", category: "Infrastructure", description: "Shell scripting engines executing task lines and system automation." },
+    { key: "ENTER", label: "Enter", type: "system", span: 2.25 }
+  ]
+];
+
+
+const fallbackProjects = [
   {
-    title: "Backend & Cloud",
-    iconComponent: Server,
-    description: "Architecting high-performance server logic, building secure APIs, and managing cloud storage systems.",
-    skills: [
-      { name: "Node JS", icon: "nodejs.svg", level: "Expert", progress: 90 },
-      { name: "Firebase", icon: "firebase.svg", level: "Intermediate", progress: 75 },
-    ]
+    id: 1,
+    Title: "ThejGPT : Conversational AI Platform",
+    Description: "Built a production-style conversational AI platform featuring persistent chat sessions, modular REST APIs, secure backend architecture, and LLM-powered responses using the Gemini API.",
+    Img: "/ThejGPT.jpg",
+    Link: "https://github.com/Thej02/ThejGPT",
+    Github: "https://github.com/Thej02/ThejGPT",
+    TechStack: ["React", "Node.js", "MongoDB", "Express", "Gemini API"],
+    Features: ["Persistent Chat Sessions", "Modular REST APIs", "Secure Backend Architecture", "Gemini LLM Responses"]
   },
   {
-    title: "Frontend & Layout",
-    iconComponent: Layout,
-    description: "Designing responsive layouts, crafting premium interactive animations, and structural elements.",
-    skills: [
-      { name: "JavaScript", icon: "javascript.svg", level: "Expert", progress: 92 },
-      { name: "ReactJS", icon: "reactjs.svg", level: "Advanced", progress: 85 },
-      { name: "Tailwind CSS", icon: "tailwind.svg", level: "Advanced", progress: 85 },
-      { name: "Material UI", icon: "MUI.svg", level: "Advanced", progress: 80 },
-      { name: "Bootstrap", icon: "bootstrap.svg", level: "Intermediate", progress: 70 },
-      { name: "HTML", icon: "html.svg", level: "Expert", progress: 95 },
-      { name: "CSS", icon: "css.svg", level: "Advanced", progress: 85 },
-    ]
+    id: 2,
+    Title: "LunaFlow : Period & Wellness Companion",
+    Description: "A secure full-stack menstrual wellness platform with intelligent period prediction, symptom tracking, mood journaling, personalized wellness insights, and interactive health analytics.",
+    Img: "/LunaFlow.jpg",
+    Link: "https://github.com/Thej02/LunaFlow",
+    Github: "https://github.com/Thej02/LunaFlow",
+    TechStack: ["React", "TypeScript", "Node.js", "MongoDB", "JWT", "Framer Motion"],
+    Features: ["Intelligent Cycle Prediction", "Symptom Tracking & Mood Journaling", "Personalized Wellness Insights", "Interactive Analytics"]
   },
   {
-    title: "Tools & Utilities",
-    iconComponent: Terminal,
-    description: "Leveraging static bundlers, content delivery hosting platforms, and customizable alert dialogs.",
-    skills: [
-      { name: "Vite", icon: "vite.svg", level: "Advanced", progress: 85 },
-      { name: "Vercel", icon: "vercel.svg", level: "Advanced", progress: 80 },
-      { name: "SweetAlert2", icon: "SweetAlert.svg", level: "Advanced", progress: 80 },
-    ]
+    id: 3,
+    Title: "SympCheck",
+    Description: "Developed a secure, AI-powered healthcare triage application offering symptom analysis, SOS assistance, and location-based emergency support. Integrated Gemini API and Firebase for fast, multilingual responses.",
+    Img: "/SympCheck.jpg",
+    Link: "https://github.com/Thej02/SympCheck",
+    Github: "https://github.com/Thej02/SympCheck",
+    TechStack: ["Python", "Flask", "Azure", "React Native", "Gemini API"],
+    Features: ["AI Triage Diagnostics", "Multilingual Support", "SOS Assistance", "Location-based Emergency Services"]
+  },
+  {
+    id: 4,
+    Title: "VoxAI",
+    Description: "Built a voice-first multilingual e-commerce platform enabling shopping through natural voice interactions. Integrated Gemini API, Firebase, and Razorpay for an intelligent user experience.",
+    Img: "/VoxAI.png",
+    Link: "https://github.com/Thej02/VoxAI-VoiceMart",
+    Github: "https://github.com/Thej02/VoxAI-VoiceMart",
+    TechStack: ["JavaScript", "Firebase", "Gemini", "Razorpay"],
+    Features: ["Voice Shopping Assistance", "Multilingual Voice Control", "Secure Razorpay Gateways", "Realtime Inventory Sync"]
+  },
+  {
+    id: 5,
+    Title: "Canara InfoBot",
+    Description: "Developed a 24×7 AI-powered campus assistant to answer academic, admission, placement, and campus-related queries. Built with Gemini API and a responsive interface for real-time assistance across devices.",
+    Img: "/CanaraInfoBot.png",
+    Link: "https://github.com/Thej02/CanaraInfoMate-Bot",
+    Github: "https://github.com/Thej02/CanaraInfoMate-Bot",
+    TechStack: ["Gemini API", "HTML", "CSS", "JavaScript"],
+    Features: ["24/7 Academic Assistance", "Responsive Mobile-First UI", "Campus Placement Q&A", "Realtime Admissions Guidance"]
   }
 ];
 
 export default function FullWidthTabs() {
   const theme = useTheme();
   const [value, setValue] = useState(0);
+  const [activeKey, setActiveKey] = useState(null);
   const [projects, setProjects] = useState([]);
   const [certificates, setCertificates] = useState([]);
   const [showAllProjects, setShowAllProjects] = useState(false);
@@ -172,17 +231,28 @@ export default function FullWidthTabs() {
       const projectData = projectsResponse.data || [];
       const certificateData = certificatesResponse.data || [];
 
-      setProjects(projectData);
+      if (projectData.length === 0) {
+        setProjects(fallbackProjects);
+        localStorage.setItem("projects", JSON.stringify(fallbackProjects));
+      } else {
+        setProjects(projectData);
+        localStorage.setItem("projects", JSON.stringify(projectData));
+      }
+      
       setCertificates(certificateData);
-
-      // Store in localStorage (fungsionalitas ini tetap dipertahankan)
-      localStorage.setItem("projects", JSON.stringify(projectData));
       localStorage.setItem("certificates", JSON.stringify(certificateData));
       
       // Dispatch custom event to notify other components (like About)
       window.dispatchEvent(new Event("portfolioDataUpdated"));
     } catch (error) {
       console.error("Error fetching data from Supabase:", error.message);
+      // Serve fallbacks on error (e.g. database offline or unconfigured)
+      setProjects(fallbackProjects);
+      localStorage.setItem("projects", JSON.stringify(fallbackProjects));
+      
+      const mockCertificates = [];
+      setCertificates(mockCertificates);
+      localStorage.setItem("certificates", JSON.stringify(mockCertificates));
     }
   }, []);
 
@@ -225,7 +295,7 @@ export default function FullWidthTabs() {
           Portfolio Showcase
         </h2>
         <p className="text-pastel-muted max-w-2xl mx-auto text-sm md:text-base mt-2">
-          Explore my journey through projects, certifications, and technical expertise. 
+          Explore my journey through projects and technical expertise. 
           Each section represents a milestone in my continuous learning path.
         </p>
       </div>
@@ -305,14 +375,9 @@ export default function FullWidthTabs() {
               {...a11yProps(0)}
             />
             <Tab
-              icon={<Award className="mb-2 w-5 h-5 transition-all duration-300" />}
-              label="Certificates"
-              {...a11yProps(1)}
-            />
-            <Tab
               icon={<Boxes className="mb-2 w-5 h-5 transition-all duration-300" />}
               label="Tech Stack"
-              {...a11yProps(2)}
+              {...a11yProps(1)}
             />
           </Tabs>
         </AppBar>
@@ -337,6 +402,7 @@ export default function FullWidthTabs() {
                       Description={project.Description}
                       Link={project.Link}
                       id={project.id}
+                      TechStack={project.TechStack}
                     />
                   </div>
                 ))}
@@ -353,30 +419,6 @@ export default function FullWidthTabs() {
           </TabPanel>
 
           <TabPanel value={value} index={1} dir={theme.direction}>
-            <div className="container mx-auto flex justify-center items-center overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-3 md:gap-5 gap-4">
-                {displayedCertificates.map((certificate, index) => (
-                  <div
-                    key={certificate.id || index}
-                    data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
-                    data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
-                  >
-                    <Certificate ImgSertif={certificate.Img} />
-                  </div>
-                ))}
-              </div>
-            </div>
-            {certificates.length > initialItems && (
-              <div className="mt-6 w-full flex justify-start">
-                <ToggleButton
-                  onClick={() => toggleShowMore('certificates')}
-                  isShowingMore={showAllCertificates}
-                />
-              </div>
-            )}
-          </TabPanel>
-
-          <TabPanel value={value} index={2} dir={theme.direction}>
             <div className="container mx-auto pb-[5%] text-[#3A3A3A] px-2 sm:px-4">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {techCategories.map((category, catIndex) => {

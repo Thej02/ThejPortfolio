@@ -102,16 +102,69 @@ const ProjectStats = ({ project }) => {
   );
 };
 
+const fallbackProjects = [
+  {
+    id: 1,
+    Title: "ThejGPT : Conversational AI Platform",
+    Description: "Built a production-style conversational AI platform featuring persistent chat sessions, modular REST APIs, secure backend architecture, and LLM-powered responses using the Gemini API.",
+    Img: "/ThejGPT.jpg",
+    Link: "https://github.com/Thej02/ThejGPT",
+    Github: "https://github.com/Thej02/ThejGPT",
+    TechStack: ["React", "Node.js", "MongoDB", "Express", "Gemini API"],
+    Features: ["Persistent Chat Sessions", "Modular REST APIs", "Secure Backend Architecture", "Gemini LLM Responses"]
+  },
+  {
+    id: 2,
+    Title: "LunaFlow : Period & Wellness Companion",
+    Description: "A secure full-stack menstrual wellness platform with intelligent period prediction, symptom tracking, mood journaling, personalized wellness insights, and interactive health analytics.",
+    Img: "/LunaFlow.jpg",
+    Link: "https://github.com/Thej02/LunaFlow",
+    Github: "https://github.com/Thej02/LunaFlow",
+    TechStack: ["React", "TypeScript", "Node.js", "MongoDB", "JWT", "Framer Motion"],
+    Features: ["Intelligent Cycle Prediction", "Symptom Tracking & Mood Journaling", "Personalized Wellness Insights", "Interactive Analytics"]
+  },
+  {
+    id: 3,
+    Title: "SympCheck",
+    Description: "Developed a secure, AI-powered healthcare triage application offering symptom analysis, SOS assistance, and location-based emergency support. Integrated Gemini API and Firebase for fast, multilingual responses.",
+    Img: "/SympCheck.jpg",
+    Link: "https://github.com/Thej02/SympCheck",
+    Github: "https://github.com/Thej02/SympCheck",
+    TechStack: ["Python", "Flask", "Azure", "React Native", "Gemini API"],
+    Features: ["AI Triage Diagnostics", "Multilingual Support", "SOS Assistance", "Location-based Emergency Services"]
+  },
+  {
+    id: 4,
+    Title: "VoxAI",
+    Description: "Built a voice-first multilingual e-commerce platform enabling shopping through natural voice interactions. Integrated Gemini API, Firebase, and Razorpay for an intelligent user experience.",
+    Img: "/VoxAI.png",
+    Link: "https://github.com/Thej02/VoxAI-VoiceMart",
+    Github: "https://github.com/Thej02/VoxAI-VoiceMart",
+    TechStack: ["JavaScript", "Firebase", "Gemini", "Razorpay"],
+    Features: ["Voice Shopping Assistance", "Multilingual Voice Control", "Secure Razorpay Gateways", "Realtime Inventory Sync"]
+  },
+  {
+    id: 5,
+    Title: "Canara InfoBot",
+    Description: "Developed a 24×7 AI-powered campus assistant to answer academic, admission, placement, and campus-related queries. Built with Gemini API and a responsive interface for real-time assistance across devices.",
+    Img: "/CanaraInfoBot.png",
+    Link: "https://github.com/Thej02/CanaraInfoMate-Bot",
+    Github: "https://github.com/Thej02/CanaraInfoMate-Bot",
+    TechStack: ["Gemini API", "HTML", "CSS", "JavaScript"],
+    Features: ["24/7 Academic Assistance", "Responsive Mobile-First UI", "Campus Placement Q&A", "Realtime Admissions Guidance"]
+  }
+];
+
 const handleGithubClick = (githubLink) => {
   if (githubLink === "Private") {
     Swal.fire({
       icon: "info",
       title: "Source Code Private",
-      text: "Maaf, source code untuk proyek ini bersifat privat.",
-      confirmButtonText: "Mengerti",
-      confirmButtonColor: "#3085d6",
-      background: "#030014",
-      color: "#ffffff",
+      text: "Sorry, the source code for this project is private.",
+      confirmButtonText: "Got it",
+      confirmButtonColor: "#C9B6E4",
+      background: "#FAF7F5",
+      color: "#3A3A3A",
     });
     return false;
   }
@@ -126,7 +179,10 @@ const ProjectDetails = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const storedProjects = JSON.parse(localStorage.getItem("projects")) || [];
+    let storedProjects = JSON.parse(localStorage.getItem("projects")) || [];
+    if (storedProjects.length === 0) {
+      storedProjects = fallbackProjects;
+    }
     // Cari project berdasarkan slug yang di-generate dari Title
     const selectedProject = storedProjects.find(
       (p) => toSlug(p.Title) === slug,

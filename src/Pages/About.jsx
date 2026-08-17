@@ -113,43 +113,6 @@ const StatCard = memo(({ icon: Icon, color, value, label, description, animation
 ));
 
 const AboutPage = () => {
-  // Memoized calculations
-  const [stats, setStats] = useState({
-    totalProjects: 0,
-    totalCertificates: 0,
-    YearExperience: 0,
-  });
-
-  useEffect(() => {
-    const updateStats = () => {
-      const storedProjects = JSON.parse(localStorage.getItem("projects") || "[]");
-      const storedCertificates = JSON.parse(localStorage.getItem("certificates") || "[]");
-      
-      const startDate = new Date("2023-01-01");
-      const today = new Date();
-      const experience = today.getFullYear() - startDate.getFullYear() -
-        (today < new Date(today.getFullYear(), startDate.getMonth(), startDate.getDate()) ? 1 : 0);
-
-      setStats({
-        totalProjects: storedProjects.length,
-        totalCertificates: storedCertificates.length,
-        YearExperience: experience
-      });
-    };
-
-    updateStats();
-
-    window.addEventListener('storage', updateStats);
-    window.addEventListener('portfolioDataUpdated', updateStats);
-
-    return () => {
-      window.removeEventListener('storage', updateStats);
-      window.removeEventListener('portfolioDataUpdated', updateStats);
-    };
-  }, []);
-
-  const { totalProjects, totalCertificates, YearExperience } = stats;
-
   // Optimized AOS initialization
   useEffect(() => {
     const initAOS = () => {
@@ -173,34 +136,6 @@ const AboutPage = () => {
       clearTimeout(resizeTimer);
     };
   }, []);
-
-  // Memoized stats data
-  const statsData = useMemo(() => [
-    {
-      icon: Code,
-      color: "from-[#6366f1] to-[#a855f7]",
-      value: totalProjects,
-      label: "Total Projects",
-      description: "Innovative web solutions crafted",
-      animation: "fade-right",
-    },
-    {
-      icon: Award,
-      color: "from-[#a855f7] to-[#6366f1]",
-      value: totalCertificates,
-      label: "Certificates",
-      description: "Professional skills validated",
-      animation: "fade-up",
-    },
-    {
-      icon: Globe,
-      color: "from-[#6366f1] to-[#a855f7]",
-      value: YearExperience,
-      label: "Years of Experience",
-      description: "Continuous learning journey",
-      animation: "fade-left",
-    },
-  ], [totalProjects, totalCertificates, YearExperience]);
 
   return (
     <div
@@ -287,14 +222,6 @@ const AboutPage = () => {
 
           <ProfileImage />
         </div>
-
-        <a href="#Portofolio">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 cursor-pointer">
-            {statsData.map((stat) => (
-              <StatCard key={stat.label} {...stat} />
-            ))}
-          </div>
-        </a>
       </div>
 
       <style jsx>{`

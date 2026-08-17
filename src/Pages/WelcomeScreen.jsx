@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Code2, Github, Globe, User } from 'lucide-react';
+import { Globe } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -16,51 +16,105 @@ const TypewriterEffect = ({ text }) => {
       } else {
         clearInterval(timer);
       }
-    }, 260);
+    }, 180);
     
     return () => clearInterval(timer);
   }, [text]);
 
   return (
-    <span className="inline-block">
+    <span className="inline-block font-mono">
       {displayText}
-      <span className="animate-pulse">|</span>
+      <span className="animate-blink ml-0.5">|</span>
     </span>
   );
 };
 
 const BackgroundEffect = () => (
-  <div className="absolute inset-0 overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/20 to-purple-600/20 blur-3xl animate-pulse" />
-    <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600/10 via-transparent to-purple-600/10 blur-2xl animate-float" />
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-[#E4E9FD] rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob" />
+    <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-[#E3F6F5] rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000" />
+    <div className="absolute top-[20%] right-[10%] w-[45%] h-[45%] bg-[#F5E6E8] rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-4000" />
   </div>
 );
 
-const IconButton = ({ Icon }) => (
-  <div className="relative group hover:scale-110 transition-transform duration-300">
-    <div className="absolute -inset-2 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full blur opacity-30 group-hover:opacity-75 transition duration-300" />
-    <div className="relative p-2 sm:p-3 bg-black/50 backdrop-blur-sm rounded-full border border-white/10">
-      <Icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-white" />
-    </div>
-  </div>
-);
+const CodeTerminal = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -15 },
+    show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 120, damping: 12 } }
+  };
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="w-full max-w-lg mx-auto rounded-2xl bg-white/70 backdrop-blur-md border border-pastel-border shadow-lg overflow-hidden text-left"
+    >
+      {/* macOS Window Controls */}
+      <div className="flex items-center gap-2 px-4 py-3.5 bg-white/40 border-b border-pastel-border/60">
+        <div className="w-3.5 h-3.5 rounded-full bg-[#FF5F56] shadow-sm" />
+        <div className="w-3.5 h-3.5 rounded-full bg-[#FFBD2E] shadow-sm" />
+        <div className="w-3.5 h-3.5 rounded-full bg-[#27C93F] shadow-sm" />
+        <span className="ml-3 text-xs font-bold text-pastel-muted font-mono tracking-wide">welcome.js</span>
+      </div>
+
+      {/* Syntax Highlighted Code */}
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className="p-6 font-mono text-[0.8rem] sm:text-[0.95rem] space-y-2 text-[#3A3A3A] leading-relaxed select-none"
+      >
+        <motion.div variants={itemVariants}>
+          <span className="text-[#a855f7] font-bold">const</span> <span className="text-[#6366f1] font-bold">developer</span> = &#123;
+        </motion.div>
+        
+        <motion.div variants={itemVariants} className="pl-5">
+          <span className="text-pastel-text">name</span>: <span className="text-[#10b981] font-medium">"Thejaswi Nayak"</span>,
+        </motion.div>
+        
+        <motion.div variants={itemVariants} className="pl-5">
+          <span className="text-pastel-text">role</span>: <span className="text-[#10b981] font-medium">"Backend Architect"</span>,
+        </motion.div>
+        
+        <motion.div variants={itemVariants} className="pl-5">
+          <span className="text-pastel-text">status</span>: <span className="text-[#f59e0b] font-medium">"ready_to_innovate"</span>
+        </motion.div>
+        
+        <motion.div variants={itemVariants}>
+          &#125;;
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 const WelcomeScreen = ({ onLoadingComplete }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     AOS.init({
-      duration: 1000,
-      once: false,
-      mirror: false,
+      duration: 800,
+      once: true,
     });
 
     const timer = setTimeout(() => {
       setIsLoading(false);
       setTimeout(() => {
         onLoadingComplete?.();
-      }, 1000);
-    }, 3400);
+      }, 800);
+    }, 3200);
     
     return () => clearTimeout(timer);
   }, [onLoadingComplete]);
@@ -68,23 +122,10 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
   const containerVariants = {
     exit: {
       opacity: 0,
-      scale: 1.1,
-      filter: "blur(10px)",
+      scale: 0.96,
+      filter: "blur(12px)",
       transition: {
-        duration: 0.8,
-        ease: "easeInOut",
-        when: "beforeChildren",
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const childVariants = {
-    exit: {
-      y: -20,
-      opacity: 0,
-      transition: {
-        duration: 0.4,
+        duration: 0.6,
         ease: "easeInOut"
       }
     }
@@ -94,7 +135,7 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
     <AnimatePresence>
       {isLoading && (
         <motion.div
-          className="fixed inset-0 bg-[#030014]"
+          className="fixed inset-0 bg-[#FAF7F5] z-50 flex items-center justify-center p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit="exit"
@@ -102,70 +143,35 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
         >
           <BackgroundEffect />
           
-          <div className="relative min-h-screen flex items-center justify-center px-4">
-            <div className="w-full max-w-4xl mx-auto">
-              {/* Icons */}
-              <motion.div 
-                className="flex justify-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8 md:mb-12"
-                variants={childVariants}
-              >
-                {[Code2, User, Github].map((Icon, index) => (
-                  <div key={index} data-aos="fade-down" data-aos-delay={index * 200}>
-                    <IconButton Icon={Icon} />
-                  </div>
-                ))}
-              </motion.div>
+          <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center justify-between min-h-[70vh] gap-8">
+            {/* Header/Title block */}
+            <div className="text-center space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-pastel-muted px-3 py-1 rounded-full bg-white/40 border border-pastel-border shadow-sm">
+                System Initializing
+              </span>
+            </div>
 
-              {/* Welcome Text */}
-              <motion.div 
-                className="text-center mb-6 sm:mb-8 md:mb-12"
-                variants={childVariants}
-              >
-                <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold space-y-2 sm:space-y-4">
-                  <div className="mb-2 sm:mb-4">
-                    <span data-aos="fade-right" data-aos-delay="200" className="inline-block px-2 bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
-                      Welcome
-                    </span>{' '}
-                    <span data-aos="fade-right" data-aos-delay="400" className="inline-block px-2 bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
-                      To
-                    </span>{' '}
-                    <span data-aos="fade-right" data-aos-delay="600" className="inline-block px-2 bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
-                      My
-                    </span>
-                  </div>
-                  <div>
-                    <span data-aos="fade-up" data-aos-delay="800" className="inline-block px-2 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                      Portfolio
-                    </span>{' '}
-                    <span data-aos="fade-up" data-aos-delay="1000" className="inline-block px-2 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                      Website
-                    </span>
-                  </div>
-                </h1>
-              </motion.div>
+            {/* Terminal Mock */}
+            <div className="w-full flex-grow flex items-center justify-center">
+              <CodeTerminal />
+            </div>
 
-              {/* Website Link */}
-              <motion.div 
-                className="text-center"
-                variants={childVariants}
-                data-aos="fade-up"
-                data-aos-delay="1200"
+            {/* Link & Domain typewriter */}
+            <div className="text-center">
+              <a
+                href="https://thejaswinayak.vercel.app"
+                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full relative group hover:scale-105 transition-all duration-300 bg-white/50 border border-pastel-border shadow-sm hover:bg-white/80"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <a
-                  href="https://thejaswinayak.vercel.app"
-                  className="inline-flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-3 rounded-full relative group hover:scale-105 transition-transform duration-300"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/20 to-purple-600/20 rounded-full blur-md group-hover:blur-lg transition-all duration-300" />
-                  <div className="relative flex items-center gap-2 text-lg sm:text-xl md:text-2xl">
-                    <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
-                    <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                      <TypewriterEffect text="thejaswinayak.vercel.app" />
-                    </span>
-                  </div>
-                </a>
-              </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-r from-pastel-primary/10 to-pastel-tertiary/10 rounded-full blur-md group-hover:blur-lg transition-all duration-300 opacity-60" />
+                <div className="relative flex items-center gap-2 text-[0.95rem] font-bold text-pastel-text">
+                  <Globe className="w-4 h-4 text-pastel-primary group-hover:rotate-12 transition-transform duration-300" />
+                  <span className="bg-gradient-to-r from-pastel-primary to-pastel-tertiary bg-clip-text text-transparent">
+                    <TypewriterEffect text="thejaswinayak.vercel.app" />
+                  </span>
+                </div>
+              </a>
             </div>
           </div>
         </motion.div>

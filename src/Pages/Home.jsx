@@ -227,7 +227,7 @@ const Home = () => {
                     isHovering ? "scale-105" : "scale-100"
                   }`}>
                     <img
-                      src="Animation1.gif"
+                      src="/Animation1.gif"
                       alt="Developer Animation"
                       className={`w-full h-full object-contain transition-all duration-500 ${
                         isHovering 

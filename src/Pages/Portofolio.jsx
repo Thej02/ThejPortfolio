@@ -188,13 +188,9 @@ const fallbackProjects = [
 ];
 
 export default function FullWidthTabs() {
-  const theme = useTheme();
-  const [value, setValue] = useState(0);
   const [activeKey, setActiveKey] = useState(null);
   const [projects, setProjects] = useState([]);
-  const [certificates, setCertificates] = useState([]);
   const [showAllProjects, setShowAllProjects] = useState(false);
-  const [showAllCertificates, setShowAllCertificates] = useState(false);
   const isMobile = window.innerWidth < 768;
   const initialItems = isMobile ? 4 : 6;
 
@@ -204,61 +200,38 @@ export default function FullWidthTabs() {
     });
   }, []);
 
-
   const fetchData = useCallback(async () => {
     try {
-      // Mengambil data dari Supabase secara paralel
-      const [projectsResponse, certificatesResponse] = await Promise.all([
-        supabase.from("projects").select("*").order('id', { ascending: false }),
-        supabase.from("certificates").select("*").order('id', { ascending: false }), 
-      ]);
+      const { data: projectData, error } = await supabase
+        .from("projects")
+        .select("*")
+        .order("id", { ascending: false });
 
-      // Error handling untuk setiap request
-      if (projectsResponse.error) throw projectsResponse.error;
-      if (certificatesResponse.error) throw certificatesResponse.error;
+      if (error) throw error;
 
-      // Supabase mengembalikan data dalam properti 'data'
-      const projectData = projectsResponse.data || [];
-      const certificateData = certificatesResponse.data || [];
-
-      if (projectData.length === 0) {
+      const items = projectData || [];
+      if (items.length === 0) {
         setProjects(fallbackProjects);
         localStorage.setItem("projects", JSON.stringify(fallbackProjects));
       } else {
-        setProjects(projectData);
-        localStorage.setItem("projects", JSON.stringify(projectData));
+        setProjects(items);
+        localStorage.setItem("projects", JSON.stringify(items));
       }
       
-      setCertificates(certificateData);
-      localStorage.setItem("certificates", JSON.stringify(certificateData));
-      
-      // Dispatch custom event to notify other components (like About)
       window.dispatchEvent(new Event("portfolioDataUpdated"));
     } catch (error) {
       console.error("Error fetching data from Supabase:", error.message);
-      // Serve fallbacks on error (e.g. database offline or unconfigured)
       setProjects(fallbackProjects);
       localStorage.setItem("projects", JSON.stringify(fallbackProjects));
-      
-      const mockCertificates = [];
-      setCertificates(mockCertificates);
-      localStorage.setItem("certificates", JSON.stringify(mockCertificates));
     }
   }, []);
 
-
-
   useEffect(() => {
-    // Coba ambil dari localStorage dulu untuk laod lebih cepat
     const cachedProjects = localStorage.getItem('projects');
-    const cachedCertificates = localStorage.getItem('certificates');
-
-    if (cachedProjects && cachedCertificates) {
+    if (cachedProjects) {
         setProjects(JSON.parse(cachedProjects));
-        setCertificates(JSON.parse(cachedCertificates));
     }
-    
-    fetchData(); // Tetap panggil fetchData untuk sinkronisasi data terbaru
+    fetchData();
   }, [fetchData]);
 
   const toggleShowMore = useCallback((type) => {

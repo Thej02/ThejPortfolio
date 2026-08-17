@@ -382,7 +382,7 @@ const ProjectDetails = () => {
           </div>
         </div>
 
-        <style jsx>{`
+        <style dangerouslySetInnerHTML={{ __html: `
           @keyframes blob {
             0% {
               transform: translate(0px, 0px) scale(1);
@@ -443,7 +443,7 @@ const ProjectDetails = () => {
               transform: translateX(0);
             }
           }
-        `}</style>
+        `}} />
       </div>
     </>
   );

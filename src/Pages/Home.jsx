@@ -756,7 +756,7 @@ const Home = () => {
                             fontFamily="Courier, monospace"
                             fontSize="13"
                             fontWeight="bold"
-                            fill="#F5F0BB"
+                            fill="#F9F0BB"
                             textAnchor="middle"
                           >
                             SQL/DB
@@ -787,7 +787,7 @@ const Home = () => {
                             fontFamily="Courier, monospace"
                             fontSize="13"
                             fontWeight="bold"
-                            fill="#C9B9E4"
+                            fill="#C9B6E4"
                             textAnchor="middle"
                           >
                             REST

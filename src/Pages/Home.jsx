@@ -249,12 +249,12 @@ const Home = () => {
 
         <meta
           property="og:title"
-          content="Thejaswi Nayak — Backend Developer & Software Engineer"
+          content="Thejaswi Nayak — Software Engineer"
         />
 
         <meta
           property="og:description"
-          content="Official portfolio of Thejaswi Nayak, Backend Developer & Software Engineer."
+          content="Official portfolio of Thejaswi Nayak, Fullstack Developer & Software Engineer."
         />
 
         <meta
@@ -273,7 +273,7 @@ const Home = () => {
               "@context": "https://schema.org",
               "@type": "Person",
               "name": "Thejaswi Nayak",
-              "jobTitle": "Backend Developer & Software Engineer",
+              "jobTitle": "Software Engineer",
               "url": "https://thejaswinayak.vercel.app",
               "sameAs": [
                 "https://github.com/Thej02",

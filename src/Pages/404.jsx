@@ -23,15 +23,14 @@ export default function NotFoundPage() {
         </div>
 
         {/* Message */}
-        <div className="mb-8">
-          <h2 className="text-3xl font-semibold text-gray-700 mb-4">
-            Oops! Halaman Tidak Ditemukan
-          </h2>
-          <p className="text-lg text-gray-600 max-w-md mx-auto leading-relaxed">
-            Halaman yang Anda cari mungkin telah dipindahkan, dihapus, atau tidak pernah ada.
-          </p>
-        </div>
-
+<div className="mb-8">
+  <h2 className="text-3xl font-semibold text-gray-700 mb-4">
+    Oops! You’re lost, Wrong Universe 😭
+  </h2>
+  <p className="text-lg text-gray-600 max-w-md mx-auto leading-relaxed">
+    This page ghosted us. It might’ve moved, disappeared, or never existed in the first place.
+  </p>
+</div>
         {/* Illustration */}
         <div className="mb-8">
           <div className="w-32 h-32 mx-auto bg-indigo-100 rounded-full flex items-center justify-center mb-6">

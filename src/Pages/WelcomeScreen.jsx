@@ -159,7 +159,7 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
             {/* Link & Domain typewriter */}
             <div className="text-center">
               <a
-                href="https://thejaswinayak.vercel.app"
+                href="https://thejaswi-portfolio.vercel.app/"
                 className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full relative group hover:scale-105 transition-all duration-300 bg-white/50 border border-pastel-border shadow-sm hover:bg-white/80"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -168,7 +168,7 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
                 <div className="relative flex items-center gap-2 text-[0.95rem] font-bold text-pastel-text">
                   <Globe className="w-4 h-4 text-pastel-primary group-hover:rotate-12 transition-transform duration-300" />
                   <span className="bg-gradient-to-r from-pastel-primary to-pastel-tertiary bg-clip-text text-transparent">
-                    <TypewriterEffect text="thejaswinayak.vercel.app" />
+                    <TypewriterEffect text="thejaswi-portfolio.vercel.app/" />
                   </span>
                 </div>
               </a>

@@ -36,7 +36,7 @@ const MainTitle = memo(() => (
       </span>
 
       {/* Line 2 */}
-      <span className="relative block whitespace-nowrap mt-3 text-3xl sm:text-4xl lg:text-4xl xl:text-5xl">
+      <span className="relative block whitespace-nowrap mt-3 text-2xl sm:text-3xl lg:text-3xl xl:text-4xl">
         <span className="absolute -inset-2 bg-gradient-to-r from-pastel-primary to-pastel-tertiary blur-2xl opacity-15" />
 
         <span className="relative bg-gradient-to-r from-pastel-primary to-pastel-tertiary bg-clip-text text-transparent">

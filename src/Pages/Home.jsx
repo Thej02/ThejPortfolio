@@ -111,7 +111,7 @@ const ERASING_SPEED = 50;
 const PAUSE_DURATION = 2000;
 
 const WORDS = [
-  "Software Engineer" ,"Full Stack Developer"
+  "Software Engineer" ,"Full Stack Developer" , "AI Engineer"
 ];
 
 const SOCIAL_LINKS = [

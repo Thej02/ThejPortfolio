@@ -1,70 +1,153 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <!-- Basic -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="/Photo.jpg" />
-  <!-- preload Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
   <link
     rel="preload"
     as="style"
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
     onload="this.onload=null;this.rel='stylesheet'"
-  >
+  />
 
   <noscript>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-    >
+    />
   </noscript>
-  
-  <!-- SEO Utama -->
+
+  <!-- SEO -->
   <title>Thejaswi Nayak | Software Engineer</title>
-  <meta name="description" content="Official portfolio of Thejaswi Nayak, a passionate Backend Developer, Software Engineer, and Full Stack Developer focusing on building scalable systems and impactful digital solutions." />
-  <meta name="keywords" content="Thejaswi Nayak, Backend Developer, Software Engineer, Full Stack Developer, portfolio, Thej02" />
-  <meta name="author" content="Thejaswi Nayak" />
 
-  <!-- Google Search Console -->
+  <meta
+    name="description"
+    content="Official portfolio of Thejaswi Nayak."
+  />
 
+  <meta
+    name="keywords"
+    content="Thejaswi Nayak, Software Engineer, Backend Developer, Full Stack Developer, Portfolio"
+  />
+
+  <meta
+    name="author"
+    content="Thejaswi Nayak"
+  />
+
+  <meta
+    name="robots"
+    content="index, follow"
+  />
 
   <!-- Theme / PWA -->
-  <meta name="theme-color" content="#FAF7F5" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta
+    name="theme-color"
+    content="#FAF7F5"
+  />
+
+  <meta
+    name="mobile-web-app-capable"
+    content="yes"
+  />
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  />
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  />
 
   <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://thejaswi=portfolio.vercel.app/" />
-  <meta property="og:title" content="Thejaswi Nayak | Software Engineer" />
-  <meta property="og:description" content="Official portfolio of Thejaswi Nayak, Fullstack Developer & Software Engineer." />
-  <meta property="og:image" content="https://thejaswinayak.vercel.app/Meta.png" />
+  <meta
+    property="og:type"
+    content="website"
+  />
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://thejaswinayak.vercel.app/" />
-  <meta name="twitter:title" content="Thejaswi Nayak | Backend Developer & Software Engineer" />
-  <meta name="twitter:description" content="Official portfolio of Thejaswi Nayak." />
-  <meta name="twitter:image" content="https://thejaswinayak.vercel.app/Meta.png" />
+  <meta
+    property="og:url"
+    content="https://thejaswi-portfolio.vercel.app/"
+  />
+
+  <meta
+    property="og:title"
+    content="Thejaswi Nayak"
+  />
+
+  <meta
+    property="og:description"
+    content="Official portfolio of Thejaswi Nayak."
+  />
+
+  <meta
+    property="og:image"
+    content="https://thejaswi-portfolio.vercel.app/Meta.png"
+  />
+
+  <meta
+    property="og:image:alt"
+    content="Thejaswi Nayak Portfolio"
+  />
+
+  <meta
+    property="og:site_name"
+    content="Thejaswi Nayak"
+  />
+
+  <!-- Twitter / X -->
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  />
+
+  <meta
+    name="twitter:url"
+    content="https://thejaswi-portfolio.vercel.app/"
+  />
+
+  <meta
+    name="twitter:title"
+    content="Thejaswi Nayak"
+  />
+
+  <meta
+    name="twitter:description"
+    content="Official portfolio of Thejaswi Nayak."
+  />
+
+  <meta
+    name="twitter:image"
+    content="https://thejaswi-portfolio.vercel.app/Meta.png"
+  />
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://thejaswinayak.vercel.app/" />
+  <link
+    rel="canonical"
+    href="https://thejaswi-portfolio.vercel.app/"
+  />
 
-  <!-- Structured Data: Person -->
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Thejaswi Nayak",
-    "url": "https://thejaswi-portfolio.vercel.app",
-    "image": "https://thejaswinayak.vercel.app/Photo.jpg",
+    "url": "https://thejaswi-portfolio.vercel.app/",
+    "image": "https://thejaswi-portfolio.vercel.app/Photo.jpg",
     "jobTitle": "Software Engineer",
-    "description": "I focus on designing efficient backends, scalable architectures, and functional full stack interfaces.",
+    "description": "Official portfolio of Thejaswi Nayak.",
     "sameAs": [
       "https://www.linkedin.com/in/thejaswi-nayak",
       "https://github.com/Thej02"
@@ -74,17 +157,25 @@
 </head>
 
 <body>
-  <!-- Konten teks penting untuk SEO -->
-  <header style="display:none">
+
+  <!-- SEO fallback content -->
+  <header style="display: none;">
     <h1>Thejaswi Nayak</h1>
+
     <p>
-      I focus on designing efficient backends, scalable architectures, and functional full stack interfaces.
+      SFullstack Developer and AI Enthusiast building scalable systems,
+      efficient architectures, and impactful digital solutions.
     </p>
   </header>
 
-  <!-- Root React -->
+  <!-- React Root -->
   <div id="root"></div>
 
-  <script type="module" src="/src/main.jsx"></script>
+  <!-- React Application -->
+  <script
+    type="module"
+    src="/src/main.jsx"
+  ></script>
+
 </body>
 </html>

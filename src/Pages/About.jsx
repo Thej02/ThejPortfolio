@@ -180,8 +180,8 @@ const AboutPage = () => {
               ========================= */}
 
               <a
-                href="/Thejaswi_Nayak_CV.pdf"
-                download="Thejaswi_Nayak_CV.pdf"
+                href="public/ThejaswiNayak_Resume .pdf"
+                download="ThejaswiNayak_Resume .pdf"
                 className="w-full lg:w-auto"
               >
 

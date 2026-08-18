@@ -20,9 +20,7 @@ const Header = memo(() => (
       data-aos="zoom-in-up"
       data-aos-duration="800"
     >
-      <Sparkles className="w-5 h-5 text-purple-400" />
-      Transforming ideas into digital experiences
-      <Sparkles className="w-5 h-5 text-purple-400" />
+      
     </p>
   </div>
 ));
@@ -132,28 +130,7 @@ const AboutPage = () => {
         I am a dedicated Backend Developer, Software Engineer, and Full Stack Developer focused on building efficient, scalable, and high-performance server-side systems. I am passionate about database design, system integration, and creating robust digital solutions that solve real-world problems.
                   </p>
 
-               {/* Quote Section */}
-      <div 
-        className="relative bg-gradient-to-br from-pastel-primary/5 via-transparent to-pastel-tertiary/5 border border-pastel-border rounded-2xl p-4 my-6 backdrop-blur-md shadow-sm overflow-hidden"
-        data-aos="fade-up"
-        data-aos-duration="1700"
-      >
-        {/* Floating orbs background */}
-        <div className="absolute top-2 right-4 w-16 h-16 bg-gradient-to-r from-pastel-primary/10 to-pastel-tertiary/10 rounded-full blur-xl"></div>
-        <div className="absolute -bottom-4 -left-2 w-12 h-12 bg-gradient-to-r from-pastel-tertiary/10 to-pastel-primary/10 rounded-full blur-lg"></div>
-        
-        {/* Quote icon */}
-        <div className="absolute top-3 left-4 text-pastel-primary opacity-55">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
-          </svg>
-        </div>
-        
-        <blockquote className="text-pastel-text text-center lg:text-left italic font-medium text-sm relative z-10 pl-6">
-          "Simplicity is the soul of efficiency, especially in backend design."
-        </blockquote>
-      </div>
-
+             
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-4 lg:px-0 w-full">
               <a href="https://drive.google.com/file/d/1hWJtEHjQZ__3OgI0d-oPw80SDzH1uZlP/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="w-full lg:w-auto">
               <button 

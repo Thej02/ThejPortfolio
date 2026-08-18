@@ -180,11 +180,10 @@ const AboutPage = () => {
               ========================= */}
 
               <a
-                href="public/ThejaswiNayak_Resume.pdf"
-                download="ThejaswiNayak_Resume.pdf"
-                className="w-full lg:w-auto"
-              >
-
+  href="/ThejaswiNayak_Resume.pdf"
+  download="ThejaswiNayak_Resume.pdf"
+  className="w-full lg:w-auto"
+>
                 <button
                   data-aos="fade-up"
                   data-aos-duration="800"

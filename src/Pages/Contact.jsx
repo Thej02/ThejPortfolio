@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Share2, User, Mail, MessageSquare, Send } from "lucide-react";
+import {
+  Share2,
+  User,
+  Mail,
+  MessageSquare,
+  Send,
+} from "lucide-react";
 import SocialLinks from "../components/SocialLinks";
 import Komentar from "../components/Commentar";
 import Swal from "sweetalert2";
@@ -19,6 +25,7 @@ const ContactPage = () => {
   useEffect(() => {
     AOS.init({
       once: false,
+      duration: 900,
     });
   }, []);
 
@@ -53,7 +60,10 @@ const ContactPage = () => {
       submitData.append("name", formData.name);
       submitData.append("email", formData.email);
       submitData.append("message", formData.message);
-      submitData.append("_subject", "New Message from Portfolio Website");
+      submitData.append(
+        "_subject",
+        "New Message from Portfolio Website"
+      );
       submitData.append("_captcha", "false");
       submitData.append("_template", "table");
 
@@ -107,15 +117,15 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="px-[5%] sm:px-[5%] lg:px-[10%]">
+    <div className="px-[5%] sm:px-[5%] lg:px-[8%]">
 
       {/* ================= HEADER ================= */}
-      <div className="text-center lg:mt-[5%] mt-10 mb-2 sm:px-0 px-[5%]">
 
+      <div className="text-center mt-10 lg:mt-[4%] mb-8">
         <h2
           data-aos="fade-down"
-          data-aos-duration="1000"
-          className="inline-block text-3xl md:text-5xl font-bold text-center mx-auto"
+          data-aos-duration="900"
+          className="inline-block text-4xl md:text-5xl font-bold"
         >
           <span
             style={{
@@ -132,43 +142,88 @@ const ContactPage = () => {
 
         <p
           data-aos="fade-up"
-          data-aos-duration="1100"
-          className="text-[#7B7790] max-w-2xl mx-auto text-sm md:text-base mt-3 leading-relaxed"
+          data-aos-duration="1000"
+          className="
+            text-[#7B7790]
+            max-w-xl
+            mx-auto
+            text-sm
+            md:text-base
+            mt-3
+            leading-relaxed
+          "
         >
-          Got an idea? Wanna build something cool? Drop me a message and
-          let's make it happen.
+          Got an idea? Wanna build something cool? Drop me a message
+          and let's make it happen.
         </p>
       </div>
 
-      {/* ================= CONTACT SECTION ================= */}
-      <div
-        className="h-auto py-10 flex items-center justify-center 2xl:pr-[3.1%] lg:pr-[3.8%] md:px-0"
-        id="Contact"
-      >
-        <div className="container px-[1%] grid grid-cols-1 md:grid-cols-1 lg:grid-cols-[45%_55%] 2xl:grid-cols-[35%_65%] gap-8 lg:gap-10">
+      {/* ================= MAIN GRID ================= */}
 
-          {/* ================= CONTACT CARD ================= */}
+      <div
+        id="Contact"
+        className="py-6 lg:py-8 flex justify-center"
+      >
+        <div
+          className="
+            w-full
+            max-w-[1200px]
+            mx-auto
+            grid
+            grid-cols-1
+            lg:grid-cols-[42%_58%]
+            gap-7
+            items-stretch
+          "
+        >
+
+          {/* =====================================================
+              LEFT — CONTACT
+          ===================================================== */}
+
           <div
+            data-aos="fade-right"
+            data-aos-duration="1000"
             className="
               bg-white
-              rounded-[28px]
-              border border-[#E8E3FF]
-              shadow-[0_20px_60px_rgba(99,102,241,0.08)]
-              p-5 py-10 sm:p-10
-              transition-all duration-500
-              hover:shadow-[0_25px_70px_rgba(99,102,241,0.12)]
+              rounded-[24px]
+              border
+              border-[#E8E3FF]
+              shadow-[0_18px_50px_rgba(99,102,241,0.07)]
+              p-6
+              sm:p-8
+              flex
+              flex-col
+              min-h-[620px]
+              transition-all
+              duration-500
+              hover:shadow-[0_24px_60px_rgba(99,102,241,0.11)]
             "
           >
 
-            {/* Card Header */}
-            <div className="flex justify-between items-start mb-8">
+            {/* Header */}
+
+            <div className="flex items-start justify-between mb-7">
 
               <div>
+                <p
+                  className="
+                    text-xs
+                    font-semibold
+                    uppercase
+                    tracking-[0.18em]
+                    text-[#8B82C8]
+                    mb-2
+                  "
+                >
+                  Get in touch
+                </p>
+
                 <h2
                   className="
-                    text-4xl
+                    text-3xl
+                    sm:text-4xl
                     font-bold
-                    mb-3
                     text-transparent
                     bg-clip-text
                     bg-gradient-to-r
@@ -179,23 +234,46 @@ const ContactPage = () => {
                   Say hi
                 </h2>
 
-                <p className="text-[#77738A] leading-relaxed">
-                  Got a project, idea, or just wanna say hey? I'm all ears.
+                <p
+                  className="
+                    text-[#77738A]
+                    text-sm
+                    leading-relaxed
+                    mt-2
+                    max-w-sm
+                  "
+                >
+                  Got a project, idea, or just wanna say hey?
+                  I'm all ears.
                 </p>
               </div>
 
-              <div className="p-3 rounded-2xl bg-[#F0EDFF]">
-                <Share2 className="w-7 h-7 text-[#7161EF]" />
+              <div
+                className="
+                  p-3
+                  rounded-2xl
+                  bg-[#F0EDFF]
+                  border
+                  border-[#E3DEFF]
+                  flex-shrink-0
+                "
+              >
+                <Share2
+                  className="w-6 h-6 text-[#7161EF]"
+                />
               </div>
+
             </div>
 
-            {/* ================= FORM ================= */}
+            {/* Form */}
+
             <form
               onSubmit={handleSubmit}
-              className="space-y-6"
+              className="space-y-5 flex-1"
             >
 
               {/* Name */}
+
               <div
                 data-aos="fade-up"
                 data-aos-delay="100"
@@ -208,7 +286,7 @@ const ContactPage = () => {
                     top-4
                     w-5
                     h-5
-                    text-[#9995AA]
+                    text-[#9D99AF]
                     group-focus-within:text-[#7161EF]
                     transition-colors
                   "
@@ -221,30 +299,31 @@ const ContactPage = () => {
                   value={formData.name}
                   onChange={handleChange}
                   disabled={isSubmitting}
+                  required
                   className="
                     w-full
-                    p-4
+                    h-[52px]
+                    px-4
                     pl-12
-                    bg-[#F8F7FF]
                     rounded-xl
+                    bg-[#F8F7FF]
                     border
-                    border-[#E8E3FF]
-                    placeholder-[#9995AA]
+                    border-[#E6E1FA]
                     text-[#302D46]
+                    placeholder-[#9995AA]
                     focus:outline-none
-                    focus:ring-2
-                    focus:ring-[#7161EF]/20
                     focus:border-[#7161EF]
+                    focus:ring-4
+                    focus:ring-[#7161EF]/10
+                    hover:border-[#C7C0EC]
                     transition-all
                     duration-300
-                    hover:border-[#B8B0F0]
-                    disabled:opacity-50
                   "
-                  required
                 />
               </div>
 
               {/* Email */}
+
               <div
                 data-aos="fade-up"
                 data-aos-delay="200"
@@ -257,7 +336,7 @@ const ContactPage = () => {
                     top-4
                     w-5
                     h-5
-                    text-[#9995AA]
+                    text-[#9D99AF]
                     group-focus-within:text-[#7161EF]
                     transition-colors
                   "
@@ -270,30 +349,31 @@ const ContactPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                   disabled={isSubmitting}
+                  required
                   className="
                     w-full
-                    p-4
+                    h-[52px]
+                    px-4
                     pl-12
-                    bg-[#F8F7FF]
                     rounded-xl
+                    bg-[#F8F7FF]
                     border
-                    border-[#E8E3FF]
-                    placeholder-[#9995AA]
+                    border-[#E6E1FA]
                     text-[#302D46]
+                    placeholder-[#9995AA]
                     focus:outline-none
-                    focus:ring-2
-                    focus:ring-[#7161EF]/20
                     focus:border-[#7161EF]
+                    focus:ring-4
+                    focus:ring-[#7161EF]/10
+                    hover:border-[#C7C0EC]
                     transition-all
                     duration-300
-                    hover:border-[#B8B0F0]
-                    disabled:opacity-50
                   "
-                  required
                 />
               </div>
 
               {/* Message */}
+
               <div
                 data-aos="fade-up"
                 data-aos-delay="300"
@@ -306,7 +386,7 @@ const ContactPage = () => {
                     top-4
                     w-5
                     h-5
-                    text-[#9995AA]
+                    text-[#9D99AF]
                     group-focus-within:text-[#7161EF]
                     transition-colors
                   "
@@ -318,32 +398,32 @@ const ContactPage = () => {
                   value={formData.message}
                   onChange={handleChange}
                   disabled={isSubmitting}
+                  required
                   className="
                     w-full
+                    h-[145px]
                     resize-none
                     p-4
                     pl-12
-                    bg-[#F8F7FF]
                     rounded-xl
+                    bg-[#F8F7FF]
                     border
-                    border-[#E8E3FF]
-                    placeholder-[#9995AA]
+                    border-[#E6E1FA]
                     text-[#302D46]
+                    placeholder-[#9995AA]
                     focus:outline-none
-                    focus:ring-2
-                    focus:ring-[#7161EF]/20
                     focus:border-[#7161EF]
+                    focus:ring-4
+                    focus:ring-[#7161EF]/10
+                    hover:border-[#C7C0EC]
                     transition-all
                     duration-300
-                    hover:border-[#B8B0F0]
-                    h-[9.9rem]
-                    disabled:opacity-50
                   "
-                  required
                 />
               </div>
 
-              {/* Submit */}
+              {/* Button */}
+
               <button
                 data-aos="fade-up"
                 data-aos-delay="400"
@@ -351,53 +431,70 @@ const ContactPage = () => {
                 disabled={isSubmitting}
                 className="
                   w-full
+                  h-[52px]
+                  rounded-xl
                   bg-gradient-to-r
                   from-[#7161EF]
                   to-[#A855F7]
                   text-white
-                  py-4
-                  rounded-xl
                   font-semibold
-                  transition-all
-                  duration-300
-                  hover:scale-[1.02]
-                  hover:shadow-lg
-                  hover:shadow-[#7161EF]/20
-                  active:scale-[0.98]
                   flex
                   items-center
                   justify-center
                   gap-2
+                  transition-all
+                  duration-300
+                  hover:scale-[1.015]
+                  hover:shadow-lg
+                  hover:shadow-[#7161EF]/20
+                  active:scale-[0.98]
                   disabled:opacity-50
                   disabled:cursor-not-allowed
-                  disabled:hover:scale-100
                 "
               >
-                <Send className="w-5 h-5" />
+                <Send className="w-4 h-4" />
 
-                {isSubmitting ? "Sending it..." : "Let's Talk"}
+                {isSubmitting
+                  ? "Sending it..."
+                  : "Let's Talk"}
               </button>
 
             </form>
 
-            {/* Social Links */}
-            <div className="mt-10 pt-6 border-t border-[#ECE9F7] flex justify-center">
+            {/* Social */}
+
+            <div
+              className="
+                mt-7
+                pt-6
+                border-t
+                border-[#ECE9F7]
+                flex
+                justify-center
+              "
+            >
               <SocialLinks />
             </div>
 
           </div>
 
-          {/* ================= COMMENTS ================= */}
+          {/* =====================================================
+              RIGHT — GUESTBOOK
+          ===================================================== */}
+
           <div
+            data-aos="fade-left"
+            data-aos-duration="1000"
             className="
               bg-white
-              rounded-[28px]
-              border border-[#E8E3FF]
-              shadow-[0_20px_60px_rgba(99,102,241,0.08)]
-              p-3
-              md:p-5
-              transition-all duration-500
-              hover:shadow-[0_25px_70px_rgba(99,102,241,0.12)]
+              rounded-[24px]
+              border
+              border-[#E8E3FF]
+              shadow-[0_18px_50px_rgba(99,102,241,0.07)]
+              overflow-hidden
+              transition-all
+              duration-500
+              hover:shadow-[0_24px_60px_rgba(99,102,241,0.11)]
             "
           >
             <Komentar />

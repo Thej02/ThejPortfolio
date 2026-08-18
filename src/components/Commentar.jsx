@@ -28,18 +28,17 @@ import "aos/dist/aos.css";
 ========================================================= */
 
 const Comment = memo(
-  ({ comment, formatDate, index, isPinned = false }) => (
+  ({ comment, formatDate, isPinned = false }) => (
     <div
       className={`
-        px-4
-        pt-4
-        pb-3
+        p-4
         rounded-xl
         border
         transition-all
+        duration-300
         group
-        hover:shadow-md
         hover:-translate-y-0.5
+        hover:shadow-sm
 
         ${
           isPinned
@@ -47,9 +46,7 @@ const Comment = memo(
               bg-gradient-to-r
               from-[#F0EDFF]
               to-[#F8F2FF]
-              border-[#C9C1F5]
-              hover:from-[#EBE7FF]
-              hover:to-[#F5ECFF]
+              border-[#CEC7F5]
             `
             : `
               bg-[#FAF9FF]
@@ -60,79 +57,73 @@ const Comment = memo(
       `}
     >
 
-      {/* Pinned label */}
       {isPinned && (
-        <div className="flex items-center gap-2 mb-3 text-[#7161EF]">
-          <Pin className="w-4 h-4" />
+        <div className="flex items-center gap-2 mb-3">
+          <Pin className="w-3.5 h-3.5 text-[#7161EF]" />
 
-          <span className="text-xs font-semibold uppercase tracking-wide">
-            Pinned Comment
+          <span
+            className="
+              text-[11px]
+              font-semibold
+              uppercase
+              tracking-wider
+              text-[#7161EF]
+            "
+          >
+            Pinned
           </span>
         </div>
       )}
 
       <div className="flex items-start gap-3">
 
-        {/* Profile */}
         {comment.profile_image ? (
           <img
             src={comment.profile_image}
             alt={`${comment.user_name}'s profile`}
-            className={`
-              w-10
-              h-10
+            className="
+              w-9
+              h-9
               rounded-full
               object-cover
               border-2
+              border-[#D7D0F8]
               flex-shrink-0
-
-              ${
-                isPinned
-                  ? "border-[#7161EF]/50"
-                  : "border-[#B8B0F0]"
-              }
-            `}
+            "
             loading="lazy"
           />
         ) : (
           <div
-            className={`
-              p-2
+            className="
+              w-9
+              h-9
               rounded-full
-              text-[#7161EF]
-              transition-colors
-
-              ${
-                isPinned
-                  ? "bg-[#7161EF]/15"
-                  : "bg-[#7161EF]/10"
-              }
-
-              group-hover:bg-[#7161EF]/20
-            `}
+              bg-[#F0EDFF]
+              flex
+              items-center
+              justify-center
+              flex-shrink-0
+            "
           >
-            <UserCircle2 className="w-5 h-5" />
+            <UserCircle2
+              className="w-5 h-5 text-[#7161EF]"
+            />
           </div>
         )}
 
-        {/* Content */}
-        <div className="flex-grow min-w-0">
+        <div className="min-w-0 flex-1">
 
-          <div className="flex items-center justify-between gap-4 mb-2">
+          <div className="flex items-center justify-between gap-3">
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 min-w-0">
 
               <h4
-                className={`
-                  font-medium
+                className="
+                  font-semibold
+                  text-sm
+                  text-[#39354F]
                   truncate
-
-                  ${
-                    isPinned
-                      ? "text-[#51458F]"
-                      : "text-[#39354F]"
-                  }
-                `}
+                "
               >
                 {comment.user_name}
               </h4>
@@ -140,12 +131,12 @@ const Comment = memo(
               {isPinned && (
                 <span
                   className="
+                    text-[10px]
                     px-2
                     py-0.5
-                    text-xs
+                    rounded-full
                     bg-[#7161EF]/10
                     text-[#7161EF]
-                    rounded-full
                     font-medium
                   "
                 >
@@ -155,17 +146,32 @@ const Comment = memo(
 
             </div>
 
-            <span className="text-xs text-[#A19DAF] whitespace-nowrap">
+            <span
+              className="
+                text-[11px]
+                text-[#A19DAF]
+                whitespace-nowrap
+              "
+            >
               {formatDate(comment.created_at)}
             </span>
 
           </div>
 
-          <p className="text-[#6F6A82] text-sm break-words leading-relaxed relative bottom-2">
+          <p
+            className="
+              text-sm
+              text-[#6F6A82]
+              leading-relaxed
+              break-words
+              mt-1
+            "
+          >
             {comment.content}
           </p>
 
         </div>
+
       </div>
     </div>
   )
@@ -178,6 +184,7 @@ const Comment = memo(
 
 const CommentForm = memo(
   ({ onSubmit, isSubmitting, error }) => {
+
     const [newComment, setNewComment] = useState("");
     const [userName, setUserName] = useState("");
 
@@ -188,41 +195,29 @@ const CommentForm = memo(
     const fileInputRef = useRef(null);
 
 
-    /* -----------------------------
-       IMAGE CHANGE
-    ----------------------------- */
-
     const handleImageChange = useCallback((e) => {
+
       const file = e.target.files[0];
 
       if (!file) return;
 
-
-      // File size
       if (file.size > 5 * 1024 * 1024) {
         alert(
-          "File size must be less than 5MB. Please choose a smaller image."
+          "File size must be less than 5MB."
         );
 
-        if (e.target) {
-          e.target.value = "";
-        }
-
+        e.target.value = "";
         return;
       }
 
-
-      // File type
       if (!file.type.startsWith("image/")) {
-        alert("Please select a valid image file.");
+        alert(
+          "Please select a valid image file."
+        );
 
-        if (e.target) {
-          e.target.value = "";
-        }
-
+        e.target.value = "";
         return;
       }
-
 
       setImageFile(file);
 
@@ -233,33 +228,38 @@ const CommentForm = memo(
       };
 
       reader.readAsDataURL(file);
+
     }, []);
 
 
-    /* -----------------------------
-       TEXTAREA
-    ----------------------------- */
+    const handleTextareaChange = useCallback(
+      (e) => {
 
-    const handleTextareaChange = useCallback((e) => {
-      setNewComment(e.target.value);
+        setNewComment(e.target.value);
 
-      if (textareaRef.current) {
-        textareaRef.current.style.height = "auto";
+        if (textareaRef.current) {
 
-        textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-      }
-    }, []);
+          textareaRef.current.style.height =
+            "auto";
 
+          textareaRef.current.style.height =
+            `${textareaRef.current.scrollHeight}px`;
+        }
 
-    /* -----------------------------
-       SUBMIT
-    ----------------------------- */
+      },
+      []
+    );
+
 
     const handleSubmit = useCallback(
       (e) => {
+
         e.preventDefault();
 
-        if (!newComment.trim() || !userName.trim()) {
+        if (
+          !newComment.trim() ||
+          !userName.trim()
+        ) {
           return;
         }
 
@@ -279,71 +279,102 @@ const CommentForm = memo(
         }
 
         if (textareaRef.current) {
-          textareaRef.current.style.height = "auto";
+          textareaRef.current.style.height =
+            "auto";
         }
+
       },
-      [newComment, userName, imageFile, onSubmit]
+      [
+        newComment,
+        userName,
+        imageFile,
+        onSubmit,
+      ]
     );
 
 
     return (
       <form
         onSubmit={handleSubmit}
-        className="space-y-6"
+        className="space-y-4"
       >
 
-        {/* ================= NAME ================= */}
+        {/* NAME */}
 
-        <div
-          className="space-y-2"
-          data-aos="fade-up"
-          data-aos-duration="1000"
-        >
-          <label className="block text-sm font-medium text-[#5F5B73]">
-            Name <span className="text-red-400">*</span>
-          </label>
+        <div>
+
+          <div className="flex items-center justify-between mb-2">
+
+            <label
+              className="
+                text-xs
+                font-semibold
+                text-[#5F5B73]
+                uppercase
+                tracking-wide
+              "
+            >
+              Name
+              <span className="text-red-400 ml-1">
+                *
+              </span>
+            </label>
+
+          </div>
 
           <input
             type="text"
             value={userName}
-            onChange={(e) => setUserName(e.target.value)}
+            onChange={(e) =>
+              setUserName(e.target.value)
+            }
             maxLength={15}
             placeholder="What should we call you?"
+            required
             className="
               w-full
-              p-3.5
+              h-[50px]
+              px-4
               rounded-xl
               bg-[#F8F7FF]
               border
-              border-[#E8E3FF]
+              border-[#E6E1FA]
               text-[#302D46]
-              placeholder-[#9995AA]
+              placeholder-[#A09CAD]
               focus:outline-none
               focus:border-[#7161EF]
-              focus:ring-2
-              focus:ring-[#7161EF]/15
+              focus:ring-4
+              focus:ring-[#7161EF]/10
+              hover:border-[#C7C0EC]
               transition-all
-              hover:border-[#B8B0F0]
             "
-            required
           />
+
         </div>
 
 
-        {/* ================= MESSAGE ================= */}
+        {/* MESSAGE */}
 
-        <div
-          className="space-y-2"
-          data-aos="fade-up"
-          data-aos-duration="1200"
-        >
-          <div className="flex items-center justify-between">
+        <div>
 
-            <label className="block text-sm font-medium text-[#5F5B73]">
-              Message <span className="text-red-400">*</span>
+          <div className="flex items-center justify-between mb-2">
+
+            <label
+              className="
+                text-xs
+                font-semibold
+                text-[#5F5B73]
+                uppercase
+                tracking-wide
+              "
+            >
+              Message
+              <span className="text-red-400 ml-1">
+                *
+              </span>
             </label>
 
-            <span className="text-xs text-[#A19DAF]">
+            <span className="text-[11px] text-[#A19DAF]">
               {newComment.length}/200
             </span>
 
@@ -355,172 +386,185 @@ const CommentForm = memo(
             maxLength={200}
             onChange={handleTextareaChange}
             placeholder="What's on your mind?"
+            required
             className="
               w-full
+              h-[100px]
+              min-h-[100px]
+              max-h-[150px]
+              resize-none
               p-4
               rounded-xl
               bg-[#F8F7FF]
               border
-              border-[#E8E3FF]
+              border-[#E6E1FA]
               text-[#302D46]
-              placeholder-[#9995AA]
+              placeholder-[#A09CAD]
               focus:outline-none
               focus:border-[#7161EF]
-              focus:ring-2
-              focus:ring-[#7161EF]/15
+              focus:ring-4
+              focus:ring-[#7161EF]/10
+              hover:border-[#C7C0EC]
               transition-all
-              resize-none
-              min-h-[120px]
-              hover:border-[#B8B0F0]
+              overflow-y-auto
             "
-            required
           />
+
         </div>
 
 
-        {/* ================= PROFILE PHOTO ================= */}
+        {/* PROFILE PHOTO */}
 
-        <div
-          className="space-y-2"
-          data-aos="fade-up"
-          data-aos-duration="1400"
-        >
+        <div>
 
-          <label className="block text-sm font-medium text-[#5F5B73]">
-            Profile Photo{" "}
-            <span className="text-[#A19DAF]">
-              (optional)
+          <div className="flex items-center justify-between mb-2">
+
+            <label
+              className="
+                text-xs
+                font-semibold
+                text-[#5F5B73]
+                uppercase
+                tracking-wide
+              "
+            >
+              Profile photo
+            </label>
+
+            <span className="text-[11px] text-[#A19DAF]">
+              Optional
             </span>
-          </label>
 
+          </div>
 
-          <div
-            className="
-              flex
-              items-center
-              gap-4
-              p-4
-              bg-[#F8F7FF]
-              border
-              border-[#E8E3FF]
-              rounded-xl
-            "
-          >
+          {imagePreview ? (
 
-            {imagePreview ? (
+            <div
+              className="
+                flex
+                items-center
+                justify-between
+                p-3
+                rounded-xl
+                bg-[#F8F7FF]
+                border
+                border-[#E6E1FA]
+              "
+            >
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
 
                 <img
                   src={imagePreview}
                   alt="Profile preview"
                   className="
-                    w-16
-                    h-16
+                    w-10
+                    h-10
                     rounded-full
                     object-cover
                     border-2
-                    border-[#7161EF]/40
+                    border-[#C9C1F5]
                   "
                 />
 
-                <button
-                  type="button"
-                  onClick={() => {
-                    setImagePreview(null);
-                    setImageFile(null);
+                <div>
 
-                    if (fileInputRef.current) {
-                      fileInputRef.current.value = "";
-                    }
-                  }}
-                  className="
-                    flex
-                    items-center
-                    gap-2
-                    px-4
-                    py-2
-                    rounded-full
-                    bg-red-50
-                    text-red-500
-                    hover:bg-red-100
-                    transition-all
-                  "
-                >
-                  <X className="w-4 h-4" />
+                  <p className="text-sm font-medium text-[#39354F]">
+                    Photo selected
+                  </p>
 
-                  <span>
-                    Remove Photo
-                  </span>
-                </button>
+                  <p className="text-[11px] text-[#A19DAF]">
+                    Ready to use
+                  </p>
+
+                </div>
 
               </div>
 
-            ) : (
+              <button
+                type="button"
+                onClick={() => {
 
-              <div className="w-full">
+                  setImagePreview(null);
+                  setImageFile(null);
 
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleImageChange}
-                  accept="image/*"
-                  className="hidden"
-                />
-
-                <button
-                  type="button"
-                  onClick={() =>
-                    fileInputRef.current?.click()
+                  if (fileInputRef.current) {
+                    fileInputRef.current.value = "";
                   }
-                  className="
-                    w-full
-                    flex
-                    items-center
-                    justify-center
-                    gap-2
-                    px-4
-                    py-3
-                    rounded-xl
-                    bg-[#F0EDFF]
-                    text-[#7161EF]
-                    hover:bg-[#E7E2FF]
-                    transition-all
-                    border
-                    border-dashed
-                    border-[#B8B0F0]
-                    hover:border-[#7161EF]
-                    group
-                  "
-                >
 
-                  <ImagePlus
-                    className="
-                      w-5
-                      h-5
-                      group-hover:scale-110
-                      transition-transform
-                    "
-                  />
+                }}
+                className="
+                  w-8
+                  h-8
+                  rounded-lg
+                  flex
+                  items-center
+                  justify-center
+                  text-[#8D899C]
+                  hover:text-red-500
+                  hover:bg-red-50
+                  transition-all
+                "
+              >
+                <X className="w-4 h-4" />
+              </button>
 
-                  <span>
-                    Choose Profile Photo
-                  </span>
+            </div>
 
-                </button>
+          ) : (
 
-                <p className="text-center text-[#A19DAF] text-xs mt-2">
-                  Max file size: 5MB
-                </p>
+            <div>
 
-              </div>
-            )}
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleImageChange}
+                accept="image/*"
+                className="hidden"
+              />
 
-          </div>
+              <button
+                type="button"
+                onClick={() =>
+                  fileInputRef.current?.click()
+                }
+                className="
+                  w-full
+                  h-[48px]
+                  flex
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-xl
+                  bg-[#F0EDFF]
+                  border
+                  border-dashed
+                  border-[#BDB4EC]
+                  text-[#7161EF]
+                  text-sm
+                  font-medium
+                  hover:bg-[#EAE6FF]
+                  hover:border-[#7161EF]
+                  transition-all
+                "
+              >
+                <ImagePlus className="w-4 h-4" />
+
+                Choose a photo
+              </button>
+
+              <p className="text-center text-[10px] text-[#AAA6B7] mt-1.5">
+                Max file size: 5MB
+              </p>
+
+            </div>
+
+          )}
+
         </div>
 
 
-        {/* ================= ERROR ================= */}
+        {/* ERROR */}
 
         {error && (
           <div
@@ -528,87 +572,68 @@ const CommentForm = memo(
               flex
               items-center
               gap-2
-              p-4
-              text-red-500
+              p-3
+              rounded-xl
               bg-red-50
               border
               border-red-100
-              rounded-xl
+              text-red-500
             "
           >
-            <AlertCircle className="w-5 h-5 flex-shrink-0" />
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
 
-            <p className="text-sm">
+            <p className="text-xs">
               {error}
             </p>
+
           </div>
         )}
 
 
-        {/* ================= SUBMIT ================= */}
+        {/* SUBMIT */}
 
         <button
           type="submit"
           disabled={isSubmitting}
-          data-aos="fade-up"
-          data-aos-duration="1000"
           className="
             relative
             w-full
-            h-12
+            h-[50px]
+            rounded-xl
+            overflow-hidden
             bg-gradient-to-r
             from-[#7161EF]
             to-[#A855F7]
-            rounded-xl
-            font-medium
             text-white
-            overflow-hidden
-            group
+            font-semibold
+            text-sm
+            flex
+            items-center
+            justify-center
+            gap-2
             transition-all
             duration-300
-            hover:scale-[1.02]
+            hover:scale-[1.01]
             hover:shadow-lg
             hover:shadow-[#7161EF]/20
             active:scale-[0.98]
             disabled:opacity-50
-            disabled:hover:scale-100
             disabled:cursor-not-allowed
           "
         >
 
-          <div
-            className="
-              absolute
-              inset-0
-              bg-white/20
-              translate-y-12
-              group-hover:translate-y-0
-              transition-transform
-              duration-300
-            "
-          />
+          {isSubmitting ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Posting...
+            </>
+          ) : (
+            <>
+              <Send className="w-4 h-4" />
+              Post it
+            </>
+          )}
 
-          <div className="relative flex items-center justify-center gap-2">
-
-            {isSubmitting ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-
-                <span>
-                  Posting...
-                </span>
-              </>
-            ) : (
-              <>
-                <Send className="w-4 h-4" />
-
-                <span>
-                  Post Comment
-                </span>
-              </>
-            )}
-
-          </div>
         </button>
 
       </form>
@@ -624,11 +649,8 @@ const CommentForm = memo(
 const Komentar = () => {
 
   const [comments, setComments] = useState([]);
-
   const [pinnedComment, setPinnedComment] = useState(null);
-
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const [error, setError] = useState("");
 
 
@@ -637,15 +659,17 @@ const Komentar = () => {
   ===================================================== */
 
   useEffect(() => {
+
     AOS.init({
       once: false,
-      duration: 1000,
+      duration: 900,
     });
+
   }, []);
 
 
   /* =====================================================
-     FETCH PINNED COMMENT
+     PINNED COMMENT
   ===================================================== */
 
   useEffect(() => {
@@ -654,13 +678,18 @@ const Komentar = () => {
 
       try {
 
-        const { data, error } = await supabase
-          .from("portfolio_comments")
-          .select("*")
-          .eq("is_pinned", true)
-          .single();
+        const { data, error } =
+          await supabase
+            .from("portfolio_comments")
+            .select("*")
+            .eq("is_pinned", true)
+            .single();
 
-        if (error && error.code !== "PGRST116") {
+        if (
+          error &&
+          error.code !== "PGRST116"
+        ) {
+
           console.error(
             "Error fetching pinned comment:",
             error
@@ -681,8 +710,8 @@ const Komentar = () => {
         );
 
       }
-    };
 
+    };
 
     fetchPinnedComment();
 
@@ -690,7 +719,7 @@ const Komentar = () => {
 
 
   /* =====================================================
-     FETCH COMMENTS + REALTIME
+     COMMENTS + REALTIME
   ===================================================== */
 
   useEffect(() => {
@@ -699,13 +728,14 @@ const Komentar = () => {
 
       try {
 
-        const { data, error } = await supabase
-          .from("portfolio_comments")
-          .select("*")
-          .eq("is_pinned", false)
-          .order("created_at", {
-            ascending: false,
-          });
+        const { data, error } =
+          await supabase
+            .from("portfolio_comments")
+            .select("*")
+            .eq("is_pinned", false)
+            .order("created_at", {
+              ascending: false,
+            });
 
         if (error) {
 
@@ -727,6 +757,7 @@ const Komentar = () => {
         );
 
       }
+
     };
 
 
@@ -756,7 +787,7 @@ const Komentar = () => {
     } catch (err) {
 
       console.warn(
-        "Failed to subscribe to comments channel:",
+        "Failed to subscribe:",
         err.message
       );
 
@@ -771,7 +802,7 @@ const Komentar = () => {
           subscription.unsubscribe();
         } catch (err) {
           console.error(
-            "Error unsubscribing comments channel:",
+            "Error unsubscribing:",
             err
           );
         }
@@ -784,7 +815,7 @@ const Komentar = () => {
 
 
   /* =====================================================
-     UPLOAD IMAGE
+     IMAGE UPLOAD
   ===================================================== */
 
   const uploadImage = useCallback(
@@ -793,7 +824,6 @@ const Komentar = () => {
       if (!imageFile) {
         return null;
       }
-
 
       const fileExt =
         imageFile.name.split(".").pop();
@@ -806,25 +836,25 @@ const Komentar = () => {
       const filePath =
         `profile-images/${fileName}`;
 
-
       const { error: uploadError } =
         await supabase.storage
           .from("profile-images")
-          .upload(filePath, imageFile);
-
+          .upload(
+            filePath,
+            imageFile
+          );
 
       if (uploadError) {
         throw uploadError;
       }
-
 
       const { data } =
         supabase.storage
           .from("profile-images")
           .getPublicUrl(filePath);
 
-
       return data.publicUrl;
+
     },
     []
   );
@@ -844,12 +874,10 @@ const Komentar = () => {
       setError("");
       setIsSubmitting(true);
 
-
       try {
 
         const profileImageUrl =
           await uploadImage(imageFile);
-
 
         const { error } =
           await supabase
@@ -858,13 +886,13 @@ const Komentar = () => {
               {
                 content: newComment,
                 user_name: userName,
-                profile_image: profileImageUrl,
+                profile_image:
+                  profileImageUrl,
                 is_pinned: false,
                 created_at:
                   new Date().toISOString(),
               },
             ]);
-
 
         if (error) {
           throw error;
@@ -872,13 +900,13 @@ const Komentar = () => {
 
       } catch (error) {
 
-        setError(
-          "Failed to post comment. Please try again."
-        );
-
         console.error(
           "Error adding comment:",
           error
+        );
+
+        setError(
+          "Couldn't post that right now. Try again."
         );
 
       } finally {
@@ -893,7 +921,7 @@ const Komentar = () => {
 
 
   /* =====================================================
-     DATE FORMAT
+     DATE
   ===================================================== */
 
   const formatDate = useCallback(
@@ -903,15 +931,12 @@ const Komentar = () => {
         return "";
       }
 
-
       const date = new Date(timestamp);
-
       const now = new Date();
 
       const diffMinutes =
         Math.floor(
-          (now - date) /
-            (1000 * 60)
+          (now - date) / 60000
         );
 
       const diffHours =
@@ -941,7 +966,6 @@ const Komentar = () => {
         return `${diffDays}d ago`;
       }
 
-
       return new Intl.DateTimeFormat(
         "en-US",
         {
@@ -956,10 +980,6 @@ const Komentar = () => {
   );
 
 
-  /* =====================================================
-     TOTAL COMMENTS
-  ===================================================== */
-
   const totalComments =
     comments.length +
     (pinnedComment ? 1 : 0);
@@ -970,68 +990,90 @@ const Komentar = () => {
   ===================================================== */
 
   return (
-    <div
-      className="
-        w-full
-        bg-white
-        rounded-[24px]
-      "
-      data-aos="fade-up"
-      data-aos-duration="1000"
-    >
+    <div className="w-full">
 
       {/* ================= HEADER ================= */}
 
       <div
         className="
-          px-5
-          pt-5
-          pb-4
+          px-6
+          py-5
           border-b
           border-[#ECE9F7]
+          bg-gradient-to-r
+          from-white
+          to-[#FCFBFF]
         "
-        data-aos="fade-down"
-        data-aos-duration="800"
       >
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between">
+
+          <div className="flex items-center gap-3">
+
+            <div
+              className="
+                w-10
+                h-10
+                rounded-xl
+                bg-[#F0EDFF]
+                flex
+                items-center
+                justify-center
+                border
+                border-[#E5DFFF]
+              "
+            >
+              <MessageCircle
+                className="
+                  w-5
+                  h-5
+                  text-[#7161EF]
+                "
+              />
+            </div>
+
+            <div>
+
+              <h3
+                className="
+                  text-xl
+                  font-bold
+                  text-[#302D46]
+                "
+              >
+                Guestbook
+              </h3>
+
+              <p
+                className="
+                  text-xs
+                  text-[#9995AA]
+                  mt-0.5
+                "
+              >
+                Leave a thought. Start a conversation.
+              </p>
+
+            </div>
+
+          </div>
+
 
           <div
             className="
-              p-2.5
-              rounded-xl
-              bg-[#F0EDFF]
+              px-3
+              py-1.5
+              rounded-full
+              bg-[#F3F0FF]
+              text-[#7161EF]
+              text-xs
+              font-semibold
             "
           >
-            <MessageCircle
-              className="
-                w-5
-                h-5
-                text-[#7161EF]
-              "
-            />
-          </div>
-
-          <div>
-
-            <h3
-              className="
-                text-xl
-                font-semibold
-                text-[#302D46]
-              "
-            >
-              Comments{" "}
-
-              <span className="text-[#7161EF]">
-                ({totalComments})
-              </span>
-            </h3>
-
-            <p className="text-xs text-[#A19DAF] mt-0.5">
-              Leave a thought. Start a conversation.
-            </p>
-
+            {totalComments}{" "}
+            {totalComments === 1
+              ? "message"
+              : "messages"}
           </div>
 
         </div>
@@ -1039,37 +1081,16 @@ const Komentar = () => {
       </div>
 
 
-      {/* ================= CONTENT ================= */}
+      {/* ================= BODY ================= */}
 
-      <div className="p-5 space-y-6">
+      <div className="p-6">
 
-        {/* Error */}
-        {error && (
-          <div
-            className="
-              flex
-              items-center
-              gap-2
-              p-4
-              text-red-500
-              bg-red-50
-              border
-              border-red-100
-              rounded-xl
-            "
-            data-aos="fade-in"
-          >
-            <AlertCircle className="w-5 h-5 flex-shrink-0" />
+        {/* FORM */}
 
-            <p className="text-sm">
-              {error}
-            </p>
-          </div>
-        )}
-
-
-        {/* Comment Form */}
-        <div>
+        <div
+          data-aos="fade-up"
+          data-aos-duration="900"
+        >
           <CommentForm
             onSubmit={handleCommentSubmit}
             isSubmitting={isSubmitting}
@@ -1078,99 +1099,128 @@ const Komentar = () => {
         </div>
 
 
-        {/* ================= COMMENTS LIST ================= */}
+        {/* DIVIDER */}
+
+        <div className="flex items-center gap-4 my-6">
+
+          <div className="h-px flex-1 bg-[#ECE9F7]" />
+
+          <span
+            className="
+              text-[10px]
+              uppercase
+              tracking-[0.15em]
+              font-semibold
+              text-[#AAA6B7]
+            "
+          >
+            Recent thoughts
+          </span>
+
+          <div className="h-px flex-1 bg-[#ECE9F7]" />
+
+        </div>
+
+
+        {/* COMMENTS */}
 
         <div
           className="
-            space-y-4
-            h-[328px]
+            min-h-[150px]
+            max-h-[230px]
             overflow-y-auto
             overflow-x-hidden
-            custom-scrollbar
-            pt-1
+            space-y-3
             pr-1
+            custom-scrollbar
           "
-          data-aos="fade-up"
-          data-aos-delay="200"
         >
 
-          {/* Pinned */}
+          {/* PINNED */}
+
           {pinnedComment && (
-            <div
-              data-aos="fade-down"
-              data-aos-duration="800"
-            >
-              <Comment
-                comment={pinnedComment}
-                formatDate={formatDate}
-                index={0}
-                isPinned={true}
-              />
-            </div>
+            <Comment
+              comment={pinnedComment}
+              formatDate={formatDate}
+              isPinned={true}
+            />
           )}
 
 
-          {/* Regular Comments */}
+          {/* EMPTY */}
 
           {comments.length === 0 &&
           !pinnedComment ? (
 
             <div
-              className="text-center py-8"
-              data-aos="fade-in"
+              className="
+                min-h-[150px]
+                flex
+                flex-col
+                items-center
+                justify-center
+                text-center
+                rounded-xl
+                bg-[#FBFAFF]
+                border
+                border-dashed
+                border-[#E3DDF7]
+              "
             >
 
               <div
                 className="
-                  w-14
-                  h-14
+                  w-11
+                  h-11
                   rounded-full
                   bg-[#F0EDFF]
                   flex
                   items-center
                   justify-center
-                  mx-auto
-                  mb-4
+                  mb-3
                 "
               >
-
-                <UserCircle2
+                <MessageCircle
                   className="
-                    w-7
-                    h-7
+                    w-5
+                    h-5
                     text-[#7161EF]
                   "
                 />
-
               </div>
 
               <p
                 className="
-                  text-[#77738A]
                   text-sm
+                  font-medium
+                  text-[#625D76]
                 "
               >
-                No comments yet. Start the conversation.
+                Nothing here yet.
+              </p>
+
+              <p
+                className="
+                  text-xs
+                  text-[#A19DAF]
+                  mt-1
+                "
+              >
+                Be the first to say something.
               </p>
 
             </div>
 
           ) : (
 
-            comments.map(
-              (comment, index) => (
-                <Comment
-                  key={comment.id}
-                  comment={comment}
-                  formatDate={formatDate}
-                  index={
-                    index +
-                    (pinnedComment ? 1 : 0)
-                  }
-                  isPinned={false}
-                />
-              )
-            )
+            comments.map((comment) => (
+              <Comment
+                key={comment.id}
+                comment={comment}
+                formatDate={formatDate}
+                isPinned={false}
+              />
+            ))
 
           )}
 
@@ -1179,35 +1229,32 @@ const Komentar = () => {
       </div>
 
 
-      {/* ================= CUSTOM SCROLLBAR ================= */}
+      {/* ================= SCROLLBAR ================= */}
 
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-            .custom-scrollbar::-webkit-scrollbar {
-              width: 6px;
-            }
+      <style>
+        {`
+          .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+          }
 
-            .custom-scrollbar::-webkit-scrollbar-track {
-              background: #F4F2FA;
-              border-radius: 6px;
-            }
+          .custom-scrollbar::-webkit-scrollbar-track {
+            background: #F5F3FA;
+            border-radius: 10px;
+          }
 
-            .custom-scrollbar::-webkit-scrollbar-thumb {
-              background: #C8C1EF;
-              border-radius: 6px;
-            }
+          .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #C9C2EC;
+            border-radius: 10px;
+          }
 
-            .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-              background: #9E94E5;
-            }
-          `,
-        }}
-      />
+          .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #9E94E5;
+          }
+        `}
+      </style>
 
     </div>
   );
 };
-
 
 export default Komentar;

@@ -756,7 +756,7 @@ const Home = () => {
                             fontFamily="Courier, monospace"
                             fontSize="13"
                             fontWeight="bold"
-                            fill="#F9F9DD"
+                            fill="#9F9F68"
                             textAnchor="middle"
                           >
                             SQL/DB

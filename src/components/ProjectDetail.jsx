@@ -104,26 +104,6 @@ const ProjectStats = ({ project }) => {
 
 const fallbackProjects = [
   {
-    id: 4,
-    Title: "ThejGPT : Conversational AI Platform",
-    Description: "Built a production-style conversational AI platform featuring persistent chat sessions, modular REST APIs, secure backend architecture, and LLM-powered responses using the Gemini API.",
-    Img: "/ThejGPT.jpg",
-    Link: "https://github.com/Thej02/ThejGPT",
-    Github: "https://github.com/Thej02/ThejGPT",
-    TechStack: ["React", "Node.js", "MongoDB", "Express", "Gemini API"],
-    Features: ["Persistent Chat Sessions", "Modular REST APIs", "Secure Backend Architecture", "Gemini LLM Responses"]
-  },
-  {
-    id: 5,
-    Title: "LunaFlow : Period & Wellness Companion",
-    Description: "A secure full-stack menstrual wellness platform with intelligent period prediction, symptom tracking, mood journaling, personalized wellness insights, and interactive health analytics.",
-    Img: "/LunaFlow.jpg",
-    Link: "https://github.com/Thej02/LunaFlow",
-    Github: "https://github.com/Thej02/LunaFlow",
-    TechStack: ["React", "TypeScript", "Node.js", "MongoDB", "JWT", "Framer Motion"],
-    Features: ["Intelligent Cycle Prediction", "Symptom Tracking & Mood Journaling", "Personalized Wellness Insights", "Interactive Analytics"]
-  },
-  {
     id: 1,
     Title: "SympCheck",
     Description: "Developed a secure, AI-powered healthcare triage application offering symptom analysis, SOS assistance, and location-based emergency support. Integrated Gemini API and Firebase for fast, multilingual responses.",
@@ -152,6 +132,26 @@ const fallbackProjects = [
     Github: "https://github.com/Thej02/CanaraInfoMate-Bot",
     TechStack: ["Gemini API", "HTML", "CSS", "JavaScript"],
     Features: ["24/7 Academic Assistance", "Responsive Mobile-First UI", "Campus Placement Q&A", "Realtime Admissions Guidance"]
+  } , 
+    {
+    id: 4,
+    Title: "ThejGPT : Conversational AI Platform",
+    Description: "Built a production-style conversational AI platform featuring persistent chat sessions, modular REST APIs, secure backend architecture, and LLM-powered responses using the Gemini API.",
+    Img: "/ThejGPT.jpg",
+    Link: "https://github.com/Thej02/ThejGPT",
+    Github: "https://github.com/Thej02/ThejGPT",
+    TechStack: ["React", "Node.js", "MongoDB", "Express", "Gemini API"],
+    Features: ["Persistent Chat Sessions", "Modular REST APIs", "Secure Backend Architecture", "Gemini LLM Responses"]
+  },
+  {
+    id: 5,
+    Title: "LunaFlow : Period & Wellness Companion",
+    Description: "A secure full-stack menstrual wellness platform with intelligent period prediction, symptom tracking, mood journaling, personalized wellness insights, and interactive health analytics.",
+    Img: "/LunaFlow.jpg",
+    Link: "https://github.com/Thej02/LunaFlow",
+    Github: "https://github.com/Thej02/LunaFlow",
+    TechStack: ["React", "TypeScript", "Node.js", "MongoDB", "JWT", "Framer Motion"],
+    Features: ["Intelligent Cycle Prediction", "Symptom Tracking & Mood Journaling", "Personalized Wellness Insights", "Interactive Analytics"]
   }
 ];
 

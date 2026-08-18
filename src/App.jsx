@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useState, lazy, Suspense } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import "./index.css";
+
 import Navbar from "./components/Navbar";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
@@ -14,67 +15,160 @@ import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+/* =========================================================
+   LAZY LOADED PAGES / COMPONENTS
+========================================================= */
+
 const Portofolio = lazy(() => import("./Pages/Portofolio"));
 const ContactPage = lazy(() => import("./Pages/Contact"));
-const ProjectDetails = lazy(() => import("./components/ProjectDetail"));
-const WelcomeScreen = lazy(() => import("./Pages/WelcomeScreen"));
-const NotFoundPage = lazy(() => import("./Pages/404"));
+const ProjectDetails = lazy(() =>
+  import("./components/ProjectDetail")
+);
+const WelcomeScreen = lazy(() =>
+  import("./Pages/WelcomeScreen")
+);
+const NotFoundPage = lazy(() =>
+  import("./Pages/404")
+);
 
-const LandingPage = ({ showWelcome, setShowWelcome }) => {
+
+/* =========================================================
+   LANDING PAGE
+========================================================= */
+
+const LandingPage = ({
+  showWelcome,
+  setShowWelcome,
+}) => {
   return (
-    <>
+    <div className="relative min-h-screen">
+
+      {/* ================= WELCOME SCREEN ================= */}
+
       <AnimatePresence mode="wait">
         {showWelcome && (
           <Suspense fallback={null}>
-            <WelcomeScreen onLoadingComplete={() => setShowWelcome(false)} />
+            <WelcomeScreen
+              onLoadingComplete={() =>
+                setShowWelcome(false)
+              }
+            />
           </Suspense>
         )}
       </AnimatePresence>
 
+
+      {/* ================= MAIN SITE ================= */}
+
       {!showWelcome && (
         <>
+          {/* Navbar */}
           <Navbar />
-      
+
+
+          {/* Home */}
           <ErrorBoundary>
             <Home />
           </ErrorBoundary>
+
+
+          {/* About */}
           <ErrorBoundary>
             <About />
           </ErrorBoundary>
+
+
+          {/* Portfolio + Contact */}
           <ErrorBoundary>
-            <Suspense fallback={<div className="h-20" />}>
+            <Suspense
+              fallback={
+                <div className="h-20" />
+              }
+            >
               <Portofolio />
               <ContactPage />
             </Suspense>
           </ErrorBoundary>
+
+
+          {/* Footer */}
           <Footer />
         </>
       )}
-    </>
+
+    </div>
   );
 };
 
-const ProjectPageLayout = () => (
-  <ErrorBoundary>
-    <Suspense fallback={<div className="min-h-screen" />}>
-      <ProjectDetails />
-    </Suspense>
-    <Footer />
-  </ErrorBoundary>
-);
+
+/* =========================================================
+   PROJECT PAGE
+========================================================= */
+
+const ProjectPageLayout = () => {
+  return (
+    <div className="relative min-h-screen">
+
+      <ErrorBoundary>
+
+        <Suspense
+          fallback={
+            <div className="min-h-screen" />
+          }
+        >
+          <ProjectDetails />
+        </Suspense>
+
+
+        {/* Footer */}
+        <Footer />
+
+      </ErrorBoundary>
+
+    </div>
+  );
+};
+
+
+/* =========================================================
+   APP
+========================================================= */
 
 function App() {
-  const [showWelcome, setShowWelcome] = useState(true);
+  const [showWelcome, setShowWelcome] =
+    useState(true);
 
   return (
-    
     <HelmetProvider>
-      <div className="pointer-events-none">
-  <AnimatedBackground />
-</div>
+
+      {/* =====================================================
+          GLOBAL ANIMATED BACKGROUND
+      ===================================================== */}
+
+      <div
+        className="
+          fixed
+          inset-0
+          -z-10
+          pointer-events-none
+        "
+      >
+        <AnimatedBackground />
+      </div>
+
+
+      {/* =====================================================
+          ROUTER
+      ===================================================== */}
+
       <BrowserRouter>
+
         <Routes>
-          {/* PUBLIC */}
+
+          {/* =================================================
+              PUBLIC LANDING PAGE
+          ================================================= */}
+
           <Route
             path="/"
             element={
@@ -85,12 +179,33 @@ function App() {
             }
           />
 
-          <Route path="/project/:slug" element={<ProjectPageLayout />} />
 
-          {/* AUTH */}
-          <Route path="/login" element={<Login />} />
+          {/* =================================================
+              PROJECT DETAILS
+          ================================================= */}
 
-          {/* ADMIN (PROTECTED) */}
+          <Route
+            path="/project/:slug"
+            element={
+              <ProjectPageLayout />
+            }
+          />
+
+
+          {/* =================================================
+              LOGIN
+          ================================================= */}
+
+          <Route
+            path="/login"
+            element={<Login />}
+          />
+
+
+          {/* =================================================
+              DASHBOARD
+          ================================================= */}
+
           <Route
             path="/dashboard/*"
             element={
@@ -100,7 +215,11 @@ function App() {
             }
           />
 
-          {/* 404 */}
+
+          {/* =================================================
+              404
+          ================================================= */}
+
           <Route
             path="*"
             element={
@@ -109,8 +228,11 @@ function App() {
               </Suspense>
             }
           />
+
         </Routes>
+
       </BrowserRouter>
+
     </HelmetProvider>
   );
 }

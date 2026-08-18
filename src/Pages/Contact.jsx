@@ -7,7 +7,6 @@ import {
   Send,
 } from "lucide-react";
 import SocialLinks from "../components/SocialLinks";
-import Komentar from "../components/Commentar";
 import Swal from "sweetalert2";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -60,10 +59,12 @@ const ContactPage = () => {
       submitData.append("name", formData.name);
       submitData.append("email", formData.email);
       submitData.append("message", formData.message);
+
       submitData.append(
         "_subject",
         "New Message from Portfolio Website"
       );
+
       submitData.append("_captcha", "false");
       submitData.append("_template", "table");
 
@@ -117,15 +118,31 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="px-[5%] sm:px-[5%] lg:px-[8%]">
+    <div className="px-[5%] sm:px-[7%] lg:px-[10%]">
 
-      {/* ================= HEADER ================= */}
+      {/* =====================================================
+          PAGE HEADER
+      ===================================================== */}
 
-      <div className="text-center mt-10 lg:mt-[4%] mb-8">
+      <div
+        className="
+          text-center
+          mt-10
+          lg:mt-[5%]
+          mb-8
+          sm:px-0
+          px-[5%]
+        "
+      >
         <h2
           data-aos="fade-down"
           data-aos-duration="900"
-          className="inline-block text-4xl md:text-5xl font-bold"
+          className="
+            inline-block
+            text-4xl
+            md:text-5xl
+            font-bold
+          "
         >
           <span
             style={{
@@ -153,59 +170,71 @@ const ContactPage = () => {
             leading-relaxed
           "
         >
-          Got an idea? Wanna build something cool? Drop me a message
-          and let's make it happen.
+          Got an idea? Wanna build something cool? Drop me a
+          message and let's make it happen.
         </p>
       </div>
 
-      {/* ================= MAIN GRID ================= */}
+
+      {/* =====================================================
+          CONTACT SECTION
+      ===================================================== */}
 
       <div
         id="Contact"
-        className="py-6 lg:py-8 flex justify-center"
+        className="
+          py-6
+          lg:py-8
+          flex
+          justify-center
+        "
       >
+
         <div
           className="
             w-full
-            max-w-[1200px]
+            max-w-[700px]
             mx-auto
-            grid
-            grid-cols-1
-            lg:grid-cols-[42%_58%]
-            gap-7
-            items-stretch
           "
         >
 
-          {/* =====================================================
-              LEFT — CONTACT
-          ===================================================== */}
+          {/* =================================================
+              CONTACT CARD
+          ================================================= */}
 
           <div
-            data-aos="fade-right"
+            data-aos="fade-up"
             data-aos-duration="1000"
             className="
               bg-white
-              rounded-[24px]
+              rounded-[28px]
               border
               border-[#E8E3FF]
-              shadow-[0_18px_50px_rgba(99,102,241,0.07)]
+              shadow-[0_20px_60px_rgba(99,102,241,0.08)]
               p-6
               sm:p-8
-              flex
-              flex-col
-              min-h-[620px]
+              md:p-10
               transition-all
               duration-500
-              hover:shadow-[0_24px_60px_rgba(99,102,241,0.11)]
+              hover:shadow-[0_25px_70px_rgba(99,102,241,0.12)]
             "
           >
 
-            {/* Header */}
+            {/* =============================================
+                CARD HEADER
+            ============================================= */}
 
-            <div className="flex items-start justify-between mb-7">
+            <div
+              className="
+                flex
+                items-start
+                justify-between
+                mb-8
+              "
+            >
 
               <div>
+
                 <p
                   className="
                     text-xs
@@ -231,22 +260,27 @@ const ContactPage = () => {
                     to-[#A855F7]
                   "
                 >
-                  Say hi
+                  Let's Build
                 </h2>
 
                 <p
                   className="
                     text-[#77738A]
                     text-sm
+                    sm:text-base
                     leading-relaxed
                     mt-2
-                    max-w-sm
+                    max-w-md
                   "
                 >
-                  Got a project, idea, or just wanna say hey?
-                  I'm all ears.
+                  Got a project, idea, or something interesting
+                  in mind? I'm all ears.
                 </p>
+
               </div>
+
+
+              {/* Share Icon */}
 
               <div
                 className="
@@ -259,26 +293,36 @@ const ContactPage = () => {
                 "
               >
                 <Share2
-                  className="w-6 h-6 text-[#7161EF]"
+                  className="
+                    w-6
+                    h-6
+                    text-[#7161EF]
+                  "
                 />
               </div>
 
             </div>
 
-            {/* Form */}
+
+            {/* =============================================
+                FORM
+            ============================================= */}
 
             <form
               onSubmit={handleSubmit}
-              className="space-y-5 flex-1"
+              className="space-y-5"
             >
 
-              {/* Name */}
+              {/* =========================================
+                  NAME
+              ========================================= */}
 
               <div
                 data-aos="fade-up"
                 data-aos-delay="100"
                 className="relative group"
               >
+
                 <User
                   className="
                     absolute
@@ -302,7 +346,7 @@ const ContactPage = () => {
                   required
                   className="
                     w-full
-                    h-[52px]
+                    h-[54px]
                     px-4
                     pl-12
                     rounded-xl
@@ -318,17 +362,23 @@ const ContactPage = () => {
                     hover:border-[#C7C0EC]
                     transition-all
                     duration-300
+                    disabled:opacity-50
                   "
                 />
+
               </div>
 
-              {/* Email */}
+
+              {/* =========================================
+                  EMAIL
+              ========================================= */}
 
               <div
                 data-aos="fade-up"
                 data-aos-delay="200"
                 className="relative group"
               >
+
                 <Mail
                   className="
                     absolute
@@ -352,7 +402,7 @@ const ContactPage = () => {
                   required
                   className="
                     w-full
-                    h-[52px]
+                    h-[54px]
                     px-4
                     pl-12
                     rounded-xl
@@ -368,17 +418,23 @@ const ContactPage = () => {
                     hover:border-[#C7C0EC]
                     transition-all
                     duration-300
+                    disabled:opacity-50
                   "
                 />
+
               </div>
 
-              {/* Message */}
+
+              {/* =========================================
+                  MESSAGE
+              ========================================= */}
 
               <div
                 data-aos="fade-up"
                 data-aos-delay="300"
                 className="relative group"
               >
+
                 <MessageSquare
                   className="
                     absolute
@@ -401,7 +457,7 @@ const ContactPage = () => {
                   required
                   className="
                     w-full
-                    h-[145px]
+                    h-[160px]
                     resize-none
                     p-4
                     pl-12
@@ -418,11 +474,16 @@ const ContactPage = () => {
                     hover:border-[#C7C0EC]
                     transition-all
                     duration-300
+                    disabled:opacity-50
                   "
                 />
+
               </div>
 
-              {/* Button */}
+
+              {/* =========================================
+                  SUBMIT BUTTON
+              ========================================= */}
 
               <button
                 data-aos="fade-up"
@@ -431,7 +492,7 @@ const ContactPage = () => {
                 disabled={isSubmitting}
                 className="
                   w-full
-                  h-[52px]
+                  h-[54px]
                   rounded-xl
                   bg-gradient-to-r
                   from-[#7161EF]
@@ -450,27 +511,31 @@ const ContactPage = () => {
                   active:scale-[0.98]
                   disabled:opacity-50
                   disabled:cursor-not-allowed
+                  disabled:hover:scale-100
                 "
               >
-                <Send className="w-4 h-4" />
+
+                <Send className="w-5 h-5" />
 
                 {isSubmitting
                   ? "Sending it..."
                   : "Let's Talk"}
+
               </button>
 
             </form>
 
-            {/* Social */}
+
+            {/* =============================================
+                SOCIAL LINKS
+            ============================================= */}
 
             <div
               className="
-                mt-7
-                pt-6
+                mt-8
+                pt-7
                 border-t
                 border-[#ECE9F7]
-                flex
-                justify-center
               "
             >
               <SocialLinks />
@@ -478,30 +543,10 @@ const ContactPage = () => {
 
           </div>
 
-          {/* =====================================================
-              RIGHT — GUESTBOOK
-          ===================================================== */}
-
-          <div
-            data-aos="fade-left"
-            data-aos-duration="1000"
-            className="
-              bg-white
-              rounded-[24px]
-              border
-              border-[#E8E3FF]
-              shadow-[0_18px_50px_rgba(99,102,241,0.07)]
-              overflow-hidden
-              transition-all
-              duration-500
-              hover:shadow-[0_24px_60px_rgba(99,102,241,0.11)]
-            "
-          >
-            <Komentar />
-          </div>
-
         </div>
+
       </div>
+
     </div>
   );
 };

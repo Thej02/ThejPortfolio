@@ -111,9 +111,7 @@ const ERASING_SPEED = 50;
 const PAUSE_DURATION = 2000;
 
 const WORDS = [
-  "Backend Developer",
-  "Software Engineer",
-  "Full Stack Developer",
+  "Software Engineer" ,"Full Stack Developer"
 ];
 
 const SOCIAL_LINKS = [
@@ -231,12 +229,12 @@ const Home = () => {
       <Helmet>
 
         <title>
-          Thejaswi Nayak — Backend Developer & Software Engineer
+          Thejaswi Nayak —  Software Engineer
         </title>
 
         <meta
           name="description"
-          content="Official portfolio of Thejaswi Nayak, a passionate Backend Developer and Software Engineer specializing in building scalable systems and backend architectures."
+          content="Official portfolio of Thejaswi Nayak, a passionate Fullstack Developer and Software Engineer specializing in building scalable systems and backend architectures."
         />
 
         <meta
@@ -246,7 +244,7 @@ const Home = () => {
 
         <link
           rel="canonical"
-          href="https://thejaswinayak.vercel.app"
+          href="https://thejaswi-portfolio.vercel.app/"
         />
 
         <meta
@@ -261,7 +259,7 @@ const Home = () => {
 
         <meta
           property="og:url"
-          content="https://thejaswinayak.vercel.app"
+          content="https://thejaswi-portfolio.vercel.app/"
         />
 
         <meta

@@ -104,7 +104,7 @@ const ProjectStats = ({ project }) => {
 
 const fallbackProjects = [
   {
-    id: 1,
+    id: 4,
     Title: "ThejGPT : Conversational AI Platform",
     Description: "Built a production-style conversational AI platform featuring persistent chat sessions, modular REST APIs, secure backend architecture, and LLM-powered responses using the Gemini API.",
     Img: "/ThejGPT.jpg",
@@ -114,7 +114,7 @@ const fallbackProjects = [
     Features: ["Persistent Chat Sessions", "Modular REST APIs", "Secure Backend Architecture", "Gemini LLM Responses"]
   },
   {
-    id: 2,
+    id: 5,
     Title: "LunaFlow : Period & Wellness Companion",
     Description: "A secure full-stack menstrual wellness platform with intelligent period prediction, symptom tracking, mood journaling, personalized wellness insights, and interactive health analytics.",
     Img: "/LunaFlow.jpg",
@@ -124,7 +124,7 @@ const fallbackProjects = [
     Features: ["Intelligent Cycle Prediction", "Symptom Tracking & Mood Journaling", "Personalized Wellness Insights", "Interactive Analytics"]
   },
   {
-    id: 3,
+    id: 1,
     Title: "SympCheck",
     Description: "Developed a secure, AI-powered healthcare triage application offering symptom analysis, SOS assistance, and location-based emergency support. Integrated Gemini API and Firebase for fast, multilingual responses.",
     Img: "/SympCheck.jpg",
@@ -134,7 +134,7 @@ const fallbackProjects = [
     Features: ["AI Triage Diagnostics", "Multilingual Support", "SOS Assistance", "Location-based Emergency Services"]
   },
   {
-    id: 4,
+    id: 2,
     Title: "VoxAI",
     Description: "Built a voice-first multilingual e-commerce platform enabling shopping through natural voice interactions. Integrated Gemini API, Firebase, and Razorpay for an intelligent user experience.",
     Img: "/VoxAI.png",
@@ -144,7 +144,7 @@ const fallbackProjects = [
     Features: ["Voice Shopping Assistance", "Multilingual Voice Control", "Secure Razorpay Gateways", "Realtime Inventory Sync"]
   },
   {
-    id: 5,
+    id: 3,
     Title: "Canara InfoBot",
     Description: "Developed a 24×7 AI-powered campus assistant to answer academic, admission, placement, and campus-related queries. Built with Gemini API and a responsive interface for real-time assistance across devices.",
     Img: "/CanaraInfoBot.png",

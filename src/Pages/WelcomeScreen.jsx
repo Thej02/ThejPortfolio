@@ -85,11 +85,11 @@ const CodeTerminal = () => {
         </motion.div>
         
         <motion.div variants={itemVariants} className="pl-5">
-          <span className="text-pastel-text">role</span>: <span className="text-[#10b981] font-medium">"Backend Architect"</span>,
+          <span className="text-pastel-text">role</span>: <span className="text-[#10b981] font-medium">"Software Engineer"</span>,
         </motion.div>
         
         <motion.div variants={itemVariants} className="pl-5">
-          <span className="text-pastel-text">status</span>: <span className="text-[#f59e0b] font-medium">"ready_to_innovate"</span>
+          <span className="text-pastel-text">status</span>: <span className="text-[#f59e0b] font-medium">"let_me_cook"</span>
         </motion.div>
         
         <motion.div variants={itemVariants}>

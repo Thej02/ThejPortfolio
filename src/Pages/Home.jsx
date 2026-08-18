@@ -341,7 +341,7 @@ const Home = () => {
                     data-aos="fade-up"
                     data-aos-delay="1000"
                   >
-                    Building scalable backends, efficient database architectures, and high-performance digital solutions.
+                    Building scalable end to end products, efficient database architectures, and high-performance digital solutions.
                   </p>
 
                   {/* =========================
@@ -787,7 +787,7 @@ const Home = () => {
                             fontFamily="Courier, monospace"
                             fontSize="13"
                             fontWeight="bold"
-                            fill="#C9B6E4"
+                            fill="#C9B9E4"
                             textAnchor="middle"
                           >
                             REST

@@ -40,7 +40,7 @@ My experience in leadership and student activities.
 
 ## Links
 
-* **Portfolio:** https://thejaswinayak.vercel.app
+* **Portfolio:** https://thejaswi-portfolio.vercel.app
 * **GitHub:** https://github.com/Thej02
 * **LinkedIn:** https://www.linkedin.com/in/thejaswi-nayak
 * **Email:** [thejaswinayak05@gmail.com](mailto:thejaswinayak05@gmail.com)

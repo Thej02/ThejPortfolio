@@ -2,7 +2,7 @@
 
 A personal portfolio website showcasing my work, technical skills, experience, projects, and achievements.
 
-**Live:** https://thejaswinayak.vercel.app
+**Live:** https://thejaswi-portfolio.vercel.app/
 
 ## About
 
